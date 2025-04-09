@@ -34,6 +34,9 @@ export default function BasicSimpleTreeView() {
       case 'FormComponents':
         navigate('/input/form');
         break;
+      case 'Icon':
+        navigate('/data/icon');
+        break;
       case 'Menu':
         navigate('/menu');
         break;
@@ -76,6 +79,16 @@ export default function BasicSimpleTreeView() {
           <TreeItem itemId="Loading" label="Loading" />
           <TreeItem itemId="InputComponents" label="Checkbox" />
           <TreeItem itemId="FormComponents" label="Input" />
+        </TreeItem>
+        <TreeItem
+          itemId="Datadisplay"
+          label={<span className="tree-label">Data display</span>}
+          slotProps={{
+            expandIcon: { className: 'tree-icon' },
+            collapseIcon: { className: 'tree-icon' },
+          }}
+        >
+          <TreeItem itemId="Icon" label="Icon" />
         </TreeItem>
         <TreeItem
           itemId="Menu"
