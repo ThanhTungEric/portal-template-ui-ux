@@ -30,7 +30,7 @@ function App() {
             <Route path="/input/form" element={<FormComponents />} />
             <Route path="/input" element={<Input />} />
             <Route path="/menu" element={<Menu />} />
-            <Route path="*" element={<p>Chọn mục bên trái để xem nội dung.</p>} />
+            <Route path="*" element={<p>Chọn mục bên trái để xem nội dung..</p>} />
           </Routes>
         </main>
       </div>

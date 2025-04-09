@@ -3,6 +3,6 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-  base: '/ui/', // ✅ CHÍNH LÀ NÓ!
+  base: '/ui/', 
   plugins: [react()],
 })
