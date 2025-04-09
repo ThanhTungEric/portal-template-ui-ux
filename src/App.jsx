@@ -13,7 +13,7 @@ import InputComponentsShowcase from './components/InputComponentsShowcase.jsx';
 import FormComponents from './components/FormComponents.jsx';
 function App() {
   return (
-    <Router>
+    <Router basename="/ui">
       <div className="app-layout">
         <aside className="sidebar">
           <BasicSimpleTreeView />
