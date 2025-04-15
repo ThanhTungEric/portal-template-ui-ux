@@ -11,7 +11,7 @@ export default function Home() {
           Welcome to the Component Library Showcase
         </Typography>
         <Typography variant="subtitle1" color="text.secondary">
-          Dự án nội bộ - Thư viện các component UI tái sử dụng v1
+          Dự án nội bộ - Thư viện các component UI tái sử dụng v2
         </Typography>
         <Typography variant="caption" color="error" display="block" mt={1}>
           ⚠️ Lưu ý: Hệ thống này chỉ áp dụng cho dự án sử dụng ReactJS.
