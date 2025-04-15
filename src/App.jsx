@@ -1,17 +1,19 @@
-import './App.css'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import './App.css';
 import BasicSimpleTreeView from './components/BasicSimpleTreeView.jsx';
+import ButtonComponent from './components/ButtonComponent.jsx';
+import FormComponents from './components/FormComponents.jsx';
+import IconView from './components/IconView.jsx';
+import InputComponentsShowcase from './components/InputComponentsShowcase.jsx';
+import ListView from './components/ListView.jsx';
+import LoadingButtonsTransition from './components/LoadingButtonsTransition.jsx';
+import LoginForm from './components/LoginForm.jsx';
+import TableView from './components/TableView.jsx';
+import Home from './pages/Home.jsx';
 import Input from './pages/Input.jsx';
 import Introduction from './pages/Introduction.jsx';
 import Login from './pages/Login.jsx';
-import LoginForm from './components/LoginForm.jsx';
 import Menu from './pages/Menu.jsx';
-import Home from './pages/Home.jsx';
-import ButtonComponent from './components/ButtonComponent.jsx';
-import LoadingButtonsTransition from './components/LoadingButtonsTransition.jsx';
-import InputComponentsShowcase from './components/InputComponentsShowcase.jsx';
-import FormComponents from './components/FormComponents.jsx';
-import IconView from './components/IconView.jsx';
 function App() {
   return (
     <Router basename="/ui">
@@ -31,6 +33,8 @@ function App() {
             <Route path="/input/form" element={<FormComponents />} />
             <Route path="/input" element={<Input />} />
             <Route path="/data/icon" element={<IconView />} />
+            <Route path="/data/list" element={<ListView />} />
+            <Route path="/data/table" element={<TableView />} />
             <Route path="/menu" element={<Menu />} />
             <Route path="*" element={<p>Chọn mục bên trái để xem nội dung. v2.</p>} />
           </Routes>
