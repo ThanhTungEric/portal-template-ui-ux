@@ -8,13 +8,14 @@ import InputComponentsShowcase from './components/InputComponentsShowcase.jsx';
 import ListView from './components/ListView.jsx';
 import LoadingButtonsTransition from './components/LoadingButtonsTransition.jsx';
 import LoginForm from './components/LoginForm.jsx';
-import TableView from './components/TableView.jsx';
+// import TableView from './components/TableView.jsx';
 import Home from './pages/Home.jsx';
 import Input from './pages/Input.jsx';
 import Introduction from './pages/Introduction.jsx';
 import Login from './pages/Login.jsx';
 import Menu from './pages/Menu.jsx';
 function App() {
+
   return (
     <Router basename="/ui">
       <div className="app-layout">
@@ -34,7 +35,7 @@ function App() {
             <Route path="/input" element={<Input />} />
             <Route path="/data/icon" element={<IconView />} />
             <Route path="/data/list" element={<ListView />} />
-            <Route path="/data/table" element={<TableView />} />
+            {/* <Route path="/data/table" element={<TableView />} /> */}
             <Route path="/menu" element={<Menu />} />
             <Route path="*" element={<p>Chọn mục bên trái để xem nội dung. v2.</p>} />
           </Routes>
