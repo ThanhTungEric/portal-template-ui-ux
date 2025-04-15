@@ -20,9 +20,17 @@ import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import Alert from '@mui/material/Alert';
 
 const alertVariants = [
+  // Severity alert
   {
-    label: '<Alert severity="success">This is a success Alert.</Alert>',
-    customRender: '<Alert severity="success">This is a success Alert.</Alert>',
+    label: 'Severity', 
+    customRender: (
+      <Stack sx={{ width: '100%' }} spacing={2}>
+        <Alert severity="success">This is a success Alert.</Alert>
+        <Alert severity="info">This is an info Alert.</Alert>
+        <Alert severity="warning">This is a warning Alert.</Alert>
+        <Alert severity="error">This is an error Alert.</Alert>
+      </Stack>
+    ),
     code: `import Alert from '@mui/material/Alert';
 
 <Stack sx={{ width: '100%' }} spacing={2}>
@@ -32,114 +40,131 @@ const alertVariants = [
     <Alert severity="error">This is an error Alert.</Alert>
 </Stack>`
   },
+  // Filled Alert
   {
-    label: 'Contained',
-    variant: 'contained',
-    code: `import { Button } from '@mui/material';
+    label: 'Filled',
+    customRender: (
+      <Stack sx={{ width: '100%' }} spacing={2}>
+        <Alert variant="filled" severity="success">
+          This is a filled success Alert.
+        </Alert>
+        <Alert variant="filled" severity="info">
+          This is a filled info Alert.
+        </Alert>
+        <Alert variant="filled" severity="warning">
+          This is a filled warning Alert.
+        </Alert>
+        <Alert variant="filled" severity="error">
+          This is a filled error Alert.
+        </Alert>
+      </Stack>
+    ),
+    code: `import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 
-<Button variant="contained">
-  Contained
-</Button>`
+<Stack sx={{ width: '100%' }} spacing={2}>
+  <Alert variant="filled" severity="success">
+    This is a filled success Alert.
+  </Alert>
+  <Alert variant="filled" severity="info">
+    This is a filled info Alert.
+  </Alert>
+  <Alert variant="filled" severity="warning">
+    This is a filled warning Alert.
+  </Alert>
+  <Alert variant="filled" severity="error">
+    This is a filled error Alert.
+  </Alert>
+</Stack>`
   },
+  // Outlined Alert
   {
     label: 'Outlined',
-    variant: 'outlined',
-    code: `import { Button } from '@mui/material';
-
-<Button variant="outlined">
-  Outlined
-</Button>`
-  },
-  {
-    label: 'Disabled',
-    variant: 'outlined',
-    disabled: true,
-    code: `import { Button } from '@mui/material';
-
-<Button variant="outlined" disabled>
-  Disabled
-</Button>`
-  },
-  {
-    label: 'Outlined w/ Icon',
     customRender: (
-      <Button variant="outlined" startIcon={<DeleteIcon />}>
-        Delete
-      </Button>
+      <Stack sx={{ width: '100%' }} spacing={2}>
+        <Alert variant="outlined" severity="success">
+          This is an outlined success Alert.
+        </Alert>
+        <Alert variant="outlined" severity="info">
+          This is an outlined info Alert.
+        </Alert>
+        <Alert variant="outlined" severity="warning">
+          This is an outlined warning Alert.
+        </Alert>
+        <Alert variant="outlined" severity="error">
+          This is an outlined error Alert.
+        </Alert>
+      </Stack>
     ),
-    code: `import { Button } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
+    code: `import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 
-<Button variant="outlined" startIcon={<DeleteIcon />}>
-  Delete
-</Button>`
+<Stack sx={{ width: '100%' }} spacing={2}>
+  <Alert variant="outlined" severity="success">
+    This is an outlined success Alert.
+  </Alert>
+  <Alert variant="outlined" severity="info">
+    This is an outlined info Alert.
+  </Alert>
+  <Alert variant="outlined" severity="warning">
+    This is an outlined warning Alert.
+  </Alert>
+  <Alert variant="outlined" severity="error">
+    This is an outlined error Alert.
+  </Alert>
+</Stack>`
   },
+  // Outlined Alert
   {
-    label: 'Contained w/ Icon',
+    label: 'Outlined',
     customRender: (
-      <Button variant="contained" endIcon={<SendIcon />}>
-        Send
-      </Button>
+      <Stack sx={{ width: '100%' }} spacing={2}>
+        <Alert variant="outlined" severity="success">
+          This is an outlined success Alert.
+        </Alert>
+        <Alert variant="outlined" severity="info">
+          This is an outlined info Alert.
+        </Alert>
+        <Alert variant="outlined" severity="warning">
+          This is an outlined warning Alert.
+        </Alert>
+        <Alert variant="outlined" severity="error">
+          This is an outlined error Alert.
+        </Alert>
+      </Stack>
     ),
-    code: `import { Button } from '@mui/material';
-import SendIcon from '@mui/icons-material/Send';
+    code: `import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 
-<Button variant="contained" endIcon={<SendIcon />}>
-  Send
-</Button>`
+<Stack sx={{ width: '100%' }} spacing={2}>
+  <Alert variant="outlined" severity="success">
+    This is an outlined success Alert.
+  </Alert>
+  <Alert variant="outlined" severity="info">
+    This is an outlined info Alert.
+  </Alert>
+  <Alert variant="outlined" severity="warning">
+    This is an outlined warning Alert.
+  </Alert>
+  <Alert variant="outlined" severity="error">
+    This is an outlined error Alert.
+  </Alert>
+</Stack>`
   },
- {
-   label: 'Upload Button',
-   customRender: (
-     <Button
-       component="label"
-       role={undefined}
-       variant="contained"
-       tabIndex={-1}
-       startIcon={<CloudUploadIcon />}
-     >
-       Upload files
-       <input
-         type="file"
-         multiple
-         hidden
-         onChange={(event) => console.log(event.target.files)}
-       />
-     </Button>
-   ),
-   code: `import { Button } from '@mui/material';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-
-<Button
- component="label"
- role={undefined}
- variant="contained"
- tabIndex={-1}
- startIcon={<CloudUploadIcon />}
->
- Upload files
- <input
-   type="file"
-   multiple
-   hidden
-   onChange={(event) => console.log(event.target.files)}
- />
-</Button>`
- },
+  // Color Alert
   {
-    label: 'Save',
+    label: 'Color',
     customRender: (
-      <Button variant="contained" color="secondary" startIcon={<SaveIcon />}>
-        Save
-      </Button>
+    <Alert severity="success" color="warning">
+      This is a success Alert with warning colors.
+    </Alert>
     ),
-    code: `import { Button } from '@mui/material';
-import SaveIcon from '@mui/icons-material/Save';
- 
-<Button variant="contained" color="secondary" startIcon={<SaveIcon />}>
-  Save
-</Button>`
-  }
+    code: `import Alert from '@mui/material/Alert';
+
+<Alert severity="success" color="warning">
+      This is a success Alert with warning colors.
+    </Alert>`
+  },
 ];
 
 export default function AlertComponent() {
@@ -147,7 +172,7 @@ export default function AlertComponent() {
  const [loading, setLoading] = useState(true);
 
  useEffect(() => {
-   const timer = setTimeout(() => setLoading(false), 800); // mô phỏng tải dữ liệu
+   const timer = setTimeout(() => setLoading(false), 800); // mô phỏng tải dữ liệu (loading action)
    return () => clearTimeout(timer);
  }, []);
 
@@ -160,7 +185,7 @@ export default function AlertComponent() {
  if (loading) {
    return (
      <Box p={4} textAlign="center">
-       <Typography variant="h6" gutterBottom>Đang tải các button...</Typography>
+       <Typography variant="h6" gutterBottom>Đang tải các alert...</Typography> {/* Loading action with text */}
        <CircularProgress color="primary" />
      </Box>
    );
@@ -179,7 +204,7 @@ export default function AlertComponent() {
                p: 2,
                display: 'flex',
                flexDirection: 'column',
-               flexGrow: 1
+               flexGrow: 1,
              }}
            >
              <Box sx={{ mb: 2, textAlign: 'center' }}>
