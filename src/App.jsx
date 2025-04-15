@@ -31,6 +31,7 @@ function App() {
             <Route path="/input/form" element={<FormComponents />} />
             <Route path="/input" element={<Input />} />
             <Route path="/data/icon" element={<IconView />} />
+            <Route path="/feedback/alert" element={<AlertComponent />} />
             <Route path="/menu" element={<Menu />} />
             <Route path="*" element={<p>Chọn mục bên trái để xem nội dung. v2.</p>} />
           </Routes>

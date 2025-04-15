@@ -40,6 +40,9 @@ export default function BasicSimpleTreeView() {
       case 'Menu':
         navigate('/menu');
         break;
+      case 'Alert':
+        navigate('/feedback/alert');
+        break;
       default:
         break;
     }
