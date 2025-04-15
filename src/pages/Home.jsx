@@ -40,7 +40,6 @@ const GermanColorBarSVG = () => {
   const slant = 8;
   const width = 660;
 
-  // 1. Đầu: Đỏ \ Vàng / Đỏ /
   const preShapes = [
     {
       color: '#FF0000', // Đỏ đầu
