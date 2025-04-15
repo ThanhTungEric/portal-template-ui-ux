@@ -1,10 +1,11 @@
 import './BasicSimpleTreeView.css';
 
-import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
 import { TreeItem } from '@mui/x-tree-view/TreeItem';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import LogoFull06 from "../assets/LOGO/VGU Full Color logo-05.png"; // ✅ logo
 
 export default function BasicSimpleTreeView() {
   const navigate = useNavigate();
@@ -37,6 +38,12 @@ export default function BasicSimpleTreeView() {
       case 'Icon':
         navigate('/data/icon');
         break;
+      case 'List':
+        navigate('/data/list');
+        break;
+      case 'Table':
+        navigate('/data/table');
+        break;
       case 'Menu':
         navigate('/menu');
         break;
@@ -50,22 +57,26 @@ export default function BasicSimpleTreeView() {
 
   return (
     <Box sx={{ minHeight: 352, minWidth: 250 }}>
+      <Box sx={{ textAlign: 'center', p: 1 }}>
+        <img
+          src={LogoFull06}
+          alt="VGU Logo"
+          onClick={() => navigate('/')}
+          style={{ maxWidth: '100%', height: 'auto', cursor: 'pointer' }}
+        />
+      </Box>
+
+
       <SimpleTreeView onSelectedItemsChange={handleSelect}>
         <TreeItem
           itemId="Introduction"
           label={<span className="tree-label">Giới thiệu</span>}
-          slotProps={{
-            expandIcon: { className: 'tree-icon' },
-            collapseIcon: { className: 'tree-icon' },
-          }}
+          slotProps={{ expandIcon: { className: 'tree-icon' }, collapseIcon: { className: 'tree-icon' } }}
         />
         <TreeItem
           itemId="Login"
           label={<span className="tree-label">Đăng nhập</span>}
-          slotProps={{
-            expandIcon: { className: 'tree-icon' },
-            collapseIcon: { className: 'tree-icon' },
-          }}
+          slotProps={{ expandIcon: { className: 'tree-icon' }, collapseIcon: { className: 'tree-icon' } }}
         >
           <TreeItem itemId="LoginForm" label="Form đăng nhập" />
           <TreeItem itemId="ForgotPassword" label="Quên mật khẩu" />
@@ -73,10 +84,7 @@ export default function BasicSimpleTreeView() {
         <TreeItem
           itemId="Inputs"
           label={<span className="tree-label">Inputs</span>}
-          slotProps={{
-            expandIcon: { className: 'tree-icon' },
-            collapseIcon: { className: 'tree-icon' },
-          }}
+          slotProps={{ expandIcon: { className: 'tree-icon' }, collapseIcon: { className: 'tree-icon' } }}
         >
           <TreeItem itemId="Buttons" label="Button" />
           <TreeItem itemId="Loading" label="Loading" />
@@ -86,20 +94,16 @@ export default function BasicSimpleTreeView() {
         <TreeItem
           itemId="Datadisplay"
           label={<span className="tree-label">Data display</span>}
-          slotProps={{
-            expandIcon: { className: 'tree-icon' },
-            collapseIcon: { className: 'tree-icon' },
-          }}
+          slotProps={{ expandIcon: { className: 'tree-icon' }, collapseIcon: { className: 'tree-icon' } }}
         >
           <TreeItem itemId="Icon" label="Icon" />
+          <TreeItem itemId="List" label="List" />
+          <TreeItem itemId="Table" label="Table" />
         </TreeItem>
         <TreeItem
           itemId="Feedback"
           label={<span className="tree-label">Feedback</span>}
-          slotProps={{
-            expandIcon: { className: 'tree-icon' },
-            collapseIcon: { className: 'tree-icon' },
-          }}
+          slotProps={{ expandIcon: { className: 'tree-icon' }, collapseIcon: { className: 'tree-icon' } }}
         >
           <TreeItem itemId="Alert" label="Alert" />
           <TreeItem itemId="Dialog" label="Dialog" />
@@ -109,10 +113,7 @@ export default function BasicSimpleTreeView() {
         <TreeItem
           itemId="Menu"
           label={<span className="tree-label">Menu</span>}
-          slotProps={{
-            expandIcon: { className: 'tree-icon' },
-            collapseIcon: { className: 'tree-icon' },
-          }}
+          slotProps={{ expandIcon: { className: 'tree-icon' }, collapseIcon: { className: 'tree-icon' } }}
         />
       </SimpleTreeView>
     </Box>
