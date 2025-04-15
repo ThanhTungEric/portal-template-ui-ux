@@ -11,7 +11,7 @@ export default function Home() {
           Welcome to the Component Library
         </Typography>
         <Typography variant="subtitle1" color="text.secondary">
-          Dự án nội bộ - Thư viện các component UI tái sử dụng
+          Dự án nội bộ - Thư viện các component UI tái sử dụng v3
         </Typography>
         <Typography variant="caption" color="error" display="block" mt={1}>
           ⚠️ Lưu ý: Hệ thống này chỉ áp dụng cho dự án sử dụng ReactJS & NextJS.
@@ -40,7 +40,6 @@ const GermanColorBarSVG = () => {
   const slant = 8;
   const width = 660;
 
-  // 1. Đầu: Đỏ \ Vàng / Đỏ /
   const preShapes = [
     {
       color: '#FF0000', // Đỏ đầu
