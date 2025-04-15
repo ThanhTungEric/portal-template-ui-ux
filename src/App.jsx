@@ -12,6 +12,7 @@ import LoadingButtonsTransition from './components/LoadingButtonsTransition.jsx'
 import InputComponentsShowcase from './components/InputComponentsShowcase.jsx';
 import FormComponents from './components/FormComponents.jsx';
 import IconView from './components/IconView.jsx';
+import AlertComponent from './components/AlertComponent.jsx';
 function App() {
   return (
     <Router basename="/ui">
@@ -34,7 +35,7 @@ function App() {
             <Route path="/feedback/alert" element={<AlertComponent />} />
             <Route path="/menu" element={<Menu />} />
             <Route path="*" element={<p>Chọn mục bên trái để xem nội dung. v2.</p>} />
-          </Routes>
+          </Routes> 
         </main>
       </div>
     </Router>

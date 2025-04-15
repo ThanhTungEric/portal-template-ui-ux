@@ -19,11 +19,10 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import Alert from '@mui/material/Alert';
 
-
 const alertVariants = [
   {
-    label: 'Severity',
-    variant: 'severity',
+    label: '<Alert severity="success">This is a success Alert.</Alert>',
+    customRender: '<Alert severity="success">This is a success Alert.</Alert>',
     code: `import Alert from '@mui/material/Alert';
 
 <Stack sx={{ width: '100%' }} spacing={2}>
@@ -89,44 +88,44 @@ import SendIcon from '@mui/icons-material/Send';
   Send
 </Button>`
   },
-  {
-    label: 'Upload Button',
-    customRender: (
-      <Button
-        component="label"
-        role={undefined}
-        variant="contained"
-        tabIndex={-1}
-        startIcon={<CloudUploadIcon />}
-      >
-        Upload files
-        <input
-          type="file"
-          multiple
-          hidden
-          onChange={(event) => console.log(event.target.files)}
-        />
-      </Button>
-    ),
-    code: `import { Button } from '@mui/material';
+ {
+   label: 'Upload Button',
+   customRender: (
+     <Button
+       component="label"
+       role={undefined}
+       variant="contained"
+       tabIndex={-1}
+       startIcon={<CloudUploadIcon />}
+     >
+       Upload files
+       <input
+         type="file"
+         multiple
+         hidden
+         onChange={(event) => console.log(event.target.files)}
+       />
+     </Button>
+   ),
+   code: `import { Button } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 <Button
-  component="label"
-  role={undefined}
-  variant="contained"
-  tabIndex={-1}
-  startIcon={<CloudUploadIcon />}
+ component="label"
+ role={undefined}
+ variant="contained"
+ tabIndex={-1}
+ startIcon={<CloudUploadIcon />}
 >
-  Upload files
-  <input
-    type="file"
-    multiple
-    hidden
-    onChange={(event) => console.log(event.target.files)}
-  />
+ Upload files
+ <input
+   type="file"
+   multiple
+   hidden
+   onChange={(event) => console.log(event.target.files)}
+ />
 </Button>`
-  },
+ },
   {
     label: 'Save',
     customRender: (
@@ -136,7 +135,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
     ),
     code: `import { Button } from '@mui/material';
 import SaveIcon from '@mui/icons-material/Save';
-  
+ 
 <Button variant="contained" color="secondary" startIcon={<SaveIcon />}>
   Save
 </Button>`
@@ -144,86 +143,87 @@ import SaveIcon from '@mui/icons-material/Save';
 ];
 
 export default function AlertComponent() {
-  const [copiedIndex, setCopiedIndex] = useState(null);
-  const [loading, setLoading] = useState(true);
+ const [copiedIndex, setCopiedIndex] = useState(null);
+ const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 800); // mô phỏng tải dữ liệu
-    return () => clearTimeout(timer);
-  }, []);
+ useEffect(() => {
+   const timer = setTimeout(() => setLoading(false), 800); // mô phỏng tải dữ liệu
+   return () => clearTimeout(timer);
+ }, []);
 
-  const handleCopy = (code, index) => {
-    navigator.clipboard.writeText(code);
-    setCopiedIndex(index);
-    setTimeout(() => setCopiedIndex(null), 1500);
-  };
+ const handleCopy = (code, index) => {
+   navigator.clipboard.writeText(code);
+   setCopiedIndex(index);
+   setTimeout(() => setCopiedIndex(null), 1500);
+ };
 
-  if (loading) {
-    return (
-      <Box p={4} textAlign="center">
-        <Typography variant="h6" gutterBottom>Đang tải các button...</Typography>
-        <CircularProgress color="primary" />
-      </Box>
-    );
-  }
+ if (loading) {
+   return (
+     <Box p={4} textAlign="center">
+       <Typography variant="h6" gutterBottom>Đang tải các button...</Typography>
+       <CircularProgress color="primary" />
+     </Box>
+   );
+ }
 
-  return (
-    <Box p={2}>
-      <Grid container spacing={4}>
-        {alertVariants.map((btn, index) => (
-          <Grid item xs={12} md={4} key={index} sx={{ display: 'flex' }}>
-            <Paper
-              elevation={2}
-              sx={{
-                borderRadius: 2,
-                overflow: 'hidden',
-                p: 2,
-                display: 'flex',
-                flexDirection: 'column',
-                flexGrow: 1
-              }}
-            >
-              <Box sx={{ mb: 2, textAlign: 'center' }}>
-                {btn.customRender ? (
-                  <Stack direction="row" justifyContent="center">
-                    {btn.customRender}
-                  </Stack>
-                ) : (
-                  <Button
-                    variant={btn.variant}
-                    disabled={btn.disabled}
-                    sx={{
-                      color: btn.variant === 'severity' || btn.variant === 'outlined' ? '#F28130' : '#fff',
-                      backgroundColor: btn.variant === 'contained' ? '#F28130' : 'transparent',
-                      borderColor: btn.variant === 'outlined' ? '#F28130' : undefined
-                    }}
-                  >
-                    {btn.label}
-                  </Button>
-                )}
-              </Box>
+ return (
+   <Box p={2}>
+     <Grid container spacing={4}>
+       {alertVariants.map((btn, index) => (
+         <Grid item xs={12} md={4} key={index} sx={{ display: 'flex' }}>
+           <Paper
+             elevation={2}
+             sx={{
+               borderRadius: 2,
+               overflow: 'hidden',
+               p: 2,
+               display: 'flex',
+               flexDirection: 'column',
+               flexGrow: 1
+             }}
+           >
+             <Box sx={{ mb: 2, textAlign: 'center' }}>
+               {btn.customRender ? (
+                 <Stack direction="row" justifyContent="center">
+                   {btn.customRender}
+                 </Stack>
+               ) : (
+                 <Button
+                   variant={btn.variant}
+                   disabled={btn.disabled}
+                   sx={{
+                     color: btn.variant === 'severity' || btn.variant === 'outlined' ? '#F28130' : '#fff',
+                     backgroundColor: btn.variant === 'contained' ? '#F28130' : 'transparent',
+                     borderColor: btn.variant === 'outlined' ? '#F28130' : undefined
+                   }}
+                 >
+                   {btn.label}
+                 </Button>
+               )}
+             </Box>
 
-              <Divider sx={{ my: 2 }} />
+             <Divider sx={{ my: 2 }} />
 
-              <Box display="flex" justifyContent="space-between" alignItems="center" mb={1}>
-                <Typography variant="subtitle2"></Typography>
-                <Button
-                  onClick={() => handleCopy(btn.code, index)}
-                  startIcon={<ContentCopyIcon />}
-                  size="small"
-                >
-                  {copiedIndex === index ? 'Đã copy!' : 'Copy code'}
-                </Button>
-              </Box>
+             <Box display="flex" justifyContent="space-between" alignItems="center" mb={1}>
+               <Typography variant="subtitle2"></Typography>
+               <Button
+                 onClick={() => handleCopy(btn.code, index)}
+                 startIcon={<ContentCopyIcon />}
+                 size="small"
+               >
+                 {copiedIndex === index ? 'Đã copy!' : 'Copy code'}
+               </Button>
+             </Box>
 
-              <Box sx={{ flexGrow: 1 }} />
-              <SyntaxHighlighter language="jsx" style={oneDark} wrapLongLines>
-                {btn.code}
-              </SyntaxHighlighter>
-            </Paper>
-          </Grid>
-        ))}
-      </Grid>
-    </Box>
-  );
+             <Box sx={{ flexGrow: 1 }} />
+             <SyntaxHighlighter language="jsx" style={oneDark} wrapLongLines>
+               {btn.code}
+             </SyntaxHighlighter>
+           </Paper>
+         </Grid>
+       ))}
+     </Grid>
+   </Box>
+ );
 }
+

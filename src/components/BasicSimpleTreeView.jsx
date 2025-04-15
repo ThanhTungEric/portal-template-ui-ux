@@ -94,6 +94,19 @@ export default function BasicSimpleTreeView() {
           <TreeItem itemId="Icon" label="Icon" />
         </TreeItem>
         <TreeItem
+          itemId="Feedback"
+          label={<span className="tree-label">Feedback</span>}
+          slotProps={{
+            expandIcon: { className: 'tree-icon' },
+            collapseIcon: { className: 'tree-icon' },
+          }}
+        >
+          <TreeItem itemId="Alert" label="Alert" />
+          <TreeItem itemId="Dialog" label="Dialog" />
+          <TreeItem itemId="Progress" label="Progress" />
+          <TreeItem itemId="snackbar" label="Snackbar" />
+        </TreeItem>
+        <TreeItem
           itemId="Menu"
           label={<span className="tree-label">Menu</span>}
           slotProps={{
