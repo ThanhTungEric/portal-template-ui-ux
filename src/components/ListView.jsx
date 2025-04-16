@@ -2,6 +2,7 @@ import {
     Avatar,
     Box,
     Button,
+    CircularProgress,
     Collapse,
     Dialog,
     DialogActions,
@@ -17,7 +18,7 @@ import {
     Paper,
     Typography,
 } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import BeachAccessIcon from '@mui/icons-material/BeachAccess';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
@@ -345,9 +346,17 @@ const componentList = [
 ]
 
 export default function ListView() {
-    const [open, setOpen] = React.useState(false);
-    const [copied, setCopied] = React.useState(false);
-    const [codeString, setCodeString] = React.useState('');
+    const [open, setOpen] = useState(false);
+    const [copied, setCopied] = useState(false);
+    const [codeString, setCodeString] = useState('');
+    const [loading, setLoading] = useState(true);
+    
+
+    useEffect(() => {
+        const timer = setTimeout(() => setLoading(false), 800); // mô phỏng tải dữ liệu
+        return () => clearTimeout(timer);
+    }, []);
+    
 
     const handleOpen = (code) => {
         setCodeString(code);
@@ -357,6 +366,16 @@ export default function ListView() {
     const handleClose = () => {
         setOpen(false);
     };
+
+    if (loading) {
+            return (
+            <Box p={4} textAlign="center">
+                <Typography variant="h6" gutterBottom>Đang tải các list...</Typography>
+                <CircularProgress color="primary" />
+            </Box>
+            );
+        }
+    
 
 
     // ✅ THÊM HANDLE COPY
