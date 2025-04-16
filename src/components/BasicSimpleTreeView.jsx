@@ -52,6 +52,9 @@ export default function BasicSimpleTreeView() {
       case 'Snackbar':
         navigate('/feedback/snackbar');
         break;
+      case 'Timeline':
+        navigate('/data/timeline');
+      break;
       default:
         break;
     }
@@ -101,6 +104,7 @@ export default function BasicSimpleTreeView() {
           }}
         >
           <TreeItem itemId="Icon" label="Icon" />
+          <TreeItem itemId="Timeline" label="Timeline" />
         </TreeItem>
         <TreeItem
           itemId="Feedback"
