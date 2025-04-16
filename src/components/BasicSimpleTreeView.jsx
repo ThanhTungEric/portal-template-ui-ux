@@ -1,10 +1,10 @@
 import './BasicSimpleTreeView.css';
 
-import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
 import { TreeItem } from '@mui/x-tree-view/TreeItem';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function BasicSimpleTreeView() {
   const navigate = useNavigate();
@@ -42,6 +42,9 @@ export default function BasicSimpleTreeView() {
         break;
       case 'Alert':
         navigate('/feedback/alert');
+        break;
+      case 'Snackbar':
+        navigate('/feedback/snackbar');
         break;
       default:
         break;
@@ -104,7 +107,7 @@ export default function BasicSimpleTreeView() {
           <TreeItem itemId="Alert" label="Alert" />
           <TreeItem itemId="Dialog" label="Dialog" />
           <TreeItem itemId="Progress" label="Progress" />
-          <TreeItem itemId="snackbar" label="Snackbar" />
+          <TreeItem itemId="Snackbar" label="Snackbar" />
         </TreeItem>
         <TreeItem
           itemId="Menu"
