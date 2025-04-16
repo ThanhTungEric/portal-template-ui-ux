@@ -21,25 +21,25 @@ import Alert from '@mui/material/Alert';
 
 const alertVariants = [
   // Severity alert
-  {
-    label: 'Severity', 
-    customRender: (
-      <Stack sx={{ width: '100%' }} spacing={2}>
-        <Alert severity="success">This is a success Alert.</Alert>
-        <Alert severity="info">This is an info Alert.</Alert>
-        <Alert severity="warning">This is a warning Alert.</Alert>
-        <Alert severity="error">This is an error Alert.</Alert>
-      </Stack>
-    ),
-    code: `import Alert from '@mui/material/Alert';
-
-<Stack sx={{ width: '100%' }} spacing={2}>
-    <Alert severity="success">This is a success Alert.</Alert>
-    <Alert severity="info">This is an info Alert.</Alert>
-    <Alert severity="warning">This is a warning Alert.</Alert>
-    <Alert severity="error">This is an error Alert.</Alert>
-</Stack>`
-  },
+    {
+      label: 'Severity', 
+      customRender: (
+        <Stack sx={{ width: '100%' }} spacing={2}>
+          <Alert severity="success">This is a success Alert.</Alert>
+          <Alert severity="info">This is an info Alert.</Alert>
+          <Alert severity="warning">This is a warning Alert.</Alert>
+          <Alert severity="error">This is an error Alert.</Alert>
+        </Stack>
+      ),
+      code: `import Alert from '@mui/material/Alert';
+  
+  <Stack sx={{ width: '100%' }} spacing={2}>
+      <Alert severity="success">This is a success Alert.</Alert>
+      <Alert severity="info">This is an info Alert.</Alert>
+      <Alert severity="warning">This is a warning Alert.</Alert>
+      <Alert severity="error">This is an error Alert.</Alert>
+  </Stack>`
+    },
   // Filled Alert
   {
     label: 'Filled',
@@ -165,7 +165,7 @@ import Stack from '@mui/material/Stack';
       This is a success Alert with warning colors.
     </Alert>`
   },
-];
+]; 
 
 export default function AlertComponent() {
  const [copiedIndex, setCopiedIndex] = useState(null);

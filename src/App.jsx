@@ -2,6 +2,7 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
 
 // Components
+import AlertComponent from './components/AlertComponent.jsx';
 import BasicSimpleTreeView from './components/BasicSimpleTreeView.jsx';
 import ButtonComponent from './components/ButtonComponent.jsx';
 import FormComponents from './components/FormComponents.jsx';
@@ -10,8 +11,9 @@ import InputComponentsShowcase from './components/InputComponentsShowcase.jsx';
 import ListView from './components/ListView.jsx';
 import LoadingButtonsTransition from './components/LoadingButtonsTransition.jsx';
 import LoginForm from './components/LoginForm.jsx';
-// import TableView from './components/TableView.jsx';
-import AlertComponent from './components/AlertComponent.jsx';
+import SnackbarComponent from './components/SnackbarComponent.jsx';
+import DialogComponent from './components/DialogComponent.jsx';
+import ProgressComponent from "./components/ProgressComponent.jsx";
 
 // Pages
 import Home from './pages/Home.jsx';
@@ -41,11 +43,13 @@ function App() {
             <Route path="/input" element={<Input />} />
             <Route path="/data/icon" element={<IconView />} />
             <Route path="/feedback/alert" element={<AlertComponent />} />
+            <Route path="/feedback/snackbar" element={<SnackbarComponent />} />
+            <Route path="/feedback/dialog" element={<DialogComponent />} />
             <Route path="/data/list" element={<ListView />} />
-            {/* <Route path="/data/table" element={<TableView />} /> */}
+            <Route path="/feedback/progress" element={<ProgressComponent />} />
             <Route path="/menu" element={<Menu />} />
             <Route path="*" element={<p>Chọn mục bên trái để xem nội dung. v2.</p>} />
-          </Routes> 
+          </Routes>
         </main>
       </div>
     </Router>
