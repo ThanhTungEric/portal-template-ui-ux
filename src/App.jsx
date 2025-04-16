@@ -9,12 +9,14 @@ import ListView from './components/ListView.jsx';
 import LoadingButtonsTransition from './components/LoadingButtonsTransition.jsx';
 import LoginForm from './components/LoginForm.jsx';
 import TableView from './components/TableView.jsx';
+import TimelineView from './components/TimelineView.jsx';
 import TypographyView from './components/TypographyView.jsx';
 import Home from './pages/Home.jsx';
 import Input from './pages/Input.jsx';
 import Introduction from './pages/Introduction.jsx';
 import Login from './pages/Login.jsx';
 import Menu from './pages/Menu.jsx';
+
 function App() {
   return (
     <Router basename="/ui">
@@ -37,6 +39,7 @@ function App() {
             <Route path="/data/list" element={<ListView />} />
             <Route path="/data/table" element={<TableView />} />
             <Route path="/data/typography" element={<TypographyView />} />
+            <Route path="/data/timeline" element={<TimelineView />} />
             <Route path="/menu" element={<Menu />} />
             <Route path="*" element={<p>Chọn mục bên trái để xem nội dung. v2.</p>} />
           </Routes>

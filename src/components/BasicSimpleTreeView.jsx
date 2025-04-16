@@ -46,6 +46,9 @@ export default function BasicSimpleTreeView() {
       case 'Typography':
         navigate('/data/typography');
         break;
+      case 'Timeline':
+        navigate('/data/timeline');
+        break;
       case 'Menu':
         navigate('/menu');
         break;
@@ -101,6 +104,7 @@ export default function BasicSimpleTreeView() {
           <TreeItem itemId="List" label="List" />
           <TreeItem itemId="Table" label="Table" />
           <TreeItem itemId="Typography" label="Typography" />
+          <TreeItem itemId="Timeline" label="Timeline" />
         </TreeItem>
         <TreeItem
           itemId="Menu"
