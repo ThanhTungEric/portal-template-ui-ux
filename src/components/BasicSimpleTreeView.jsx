@@ -43,6 +43,12 @@ export default function BasicSimpleTreeView() {
       case 'Alert':
         navigate('/feedback/alert');
         break;
+      case 'Dialog':
+        navigate('/feedback/dialog');
+      break;
+      case 'Progress':
+        navigate('/feedback/progress');
+      break;
       default:
         break;
     }

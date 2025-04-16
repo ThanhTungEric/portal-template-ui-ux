@@ -13,6 +13,9 @@ import InputComponentsShowcase from './components/InputComponentsShowcase.jsx';
 import FormComponents from './components/FormComponents.jsx';
 import IconView from './components/IconView.jsx';
 import AlertComponent from './components/AlertComponent.jsx';
+import DialogComponent from './components/DialogComponent.jsx';
+import ProgressComponent from "./components/ProgressComponent.jsx"
+
 function App() {
   return (
     <Router basename="/ui">
@@ -33,6 +36,8 @@ function App() {
             <Route path="/input" element={<Input />} />
             <Route path="/data/icon" element={<IconView />} />
             <Route path="/feedback/alert" element={<AlertComponent />} />
+            <Route path="/feedback/dialog" element={<DialogComponent />} />
+            <Route path="/feedback/progress" element={<ProgressComponent />} />
             <Route path="/menu" element={<Menu />} />
             <Route path="*" element={<p>Chọn mục bên trái để xem nội dung. v2.</p>} />
           </Routes> 
