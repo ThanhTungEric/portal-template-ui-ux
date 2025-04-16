@@ -5,6 +5,7 @@ import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
 import { TreeItem } from '@mui/x-tree-view/TreeItem';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import LogoFull06 from '../assets/LOGO/VGU Full Color logo-05.png';
 
 export default function BasicSimpleTreeView() {
   const navigate = useNavigate();
@@ -42,6 +43,9 @@ export default function BasicSimpleTreeView() {
         break;
       case 'Table':
         navigate('/data/table');
+        break;
+      case 'Typography':
+        navigate('/data/typography');
         break;
       case 'Menu':
         navigate('/menu');
@@ -107,6 +111,7 @@ export default function BasicSimpleTreeView() {
           <TreeItem itemId="Icon" label="Icon" />
           <TreeItem itemId="List" label="List" />
           <TreeItem itemId="Table" label="Table" />
+          <TreeItem itemId="Typography" label="Typography" />
         </TreeItem>
         <TreeItem
           itemId="Feedback"

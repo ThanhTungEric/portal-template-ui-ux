@@ -16,6 +16,8 @@ import DialogComponent from './components/DialogComponent.jsx';
 import ProgressComponent from "./components/ProgressComponent.jsx";
 
 // Pages
+import TableView from './components/TableView.jsx';
+import TypographyView from './components/TypographyView.jsx';
 import Home from './pages/Home.jsx';
 import Input from './pages/Input.jsx';
 import Introduction from './pages/Introduction.jsx';
@@ -47,6 +49,8 @@ function App() {
             <Route path="/feedback/dialog" element={<DialogComponent />} />
             <Route path="/data/list" element={<ListView />} />
             <Route path="/feedback/progress" element={<ProgressComponent />} />
+            <Route path="/data/table" element={<TableView />} />
+            <Route path="/data/typography" element={<TypographyView />} />
             <Route path="/menu" element={<Menu />} />
             <Route path="*" element={<p>Chọn mục bên trái để xem nội dung. v2.</p>} />
           </Routes>
