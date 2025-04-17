@@ -153,7 +153,7 @@ export default function IconView() {
 
   return (
     <Box p={4}>
-        <Typography variant="h5" gutterBottom>
+        <Typography variant="h4" gutterBottom>
           List of Icons
         </Typography>
         <Typography variant="body2" gutterBottom>
