@@ -1,21 +1,34 @@
+import { Box, Grid, IconButton, Modal, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import { Modal, Box, Grid, IconButton } from '@mui/material';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 // Ví dụ import icon, sau này bạn thay bằng danh sách thật
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AddIcon from '@mui/icons-material/Add';
 import AddLinkIcon from '@mui/icons-material/AddLink';
+import AddToDriveIcon from '@mui/icons-material/AddToDrive';
 import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
+import AdfScannerIcon from '@mui/icons-material/AdfScanner';
+import AndroidIcon from '@mui/icons-material/Android';
 import AnnouncementIcon from '@mui/icons-material/Announcement';
+import AppleIcon from '@mui/icons-material/Apple';
 import AppsIcon from '@mui/icons-material/Apps';
+import ArchiveIcon from '@mui/icons-material/Archive';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import ArticleIcon from '@mui/icons-material/Article';
+import AssignmentIcon from '@mui/icons-material/Assignment';
 import AttachmentIcon from '@mui/icons-material/Attachment';
 import AudioFileIcon from '@mui/icons-material/AudioFile';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
@@ -24,9 +37,9 @@ import BackupIcon from '@mui/icons-material/Backup';
 import BlockIcon from '@mui/icons-material/Block';
 import BluetoothIcon from '@mui/icons-material/Bluetooth';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import BookmarkRemoveIcon from '@mui/icons-material/BookmarkRemove';
 import CallIcon from '@mui/icons-material/Call';
 import CastIcon from '@mui/icons-material/Cast';
@@ -40,9 +53,9 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import ContentCutIcon from '@mui/icons-material/ContentCut';
 import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import CopyrightIcon from '@mui/icons-material/Copyright';
-import CropIcon from '@mui/icons-material/Crop';
-import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
 import CreateIcon from '@mui/icons-material/Create';
+import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
+import CropIcon from '@mui/icons-material/Crop';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DoDisturbIcon from '@mui/icons-material/DoDisturb';
 import DownloadIcon from '@mui/icons-material/Download';
@@ -58,17 +71,30 @@ import ReplyIcon from '@mui/icons-material/Reply';
 
 const icons = [
   { name: 'AccessAlarm', component: <AccessAlarmIcon fontSize="large" />, importPath: "@mui/icons-material/AccessAlarm" },
-  { name: 'AccountCircle', component: <AccountCircleIcon fontSize="large" />, importPath: "@mui/icons-material/AccountCircle" },
   { name: 'AccessTimeFilled', component: <AccessTimeFilledIcon fontSize="large" />, importPath: "@mui/icons-material/AccessTimeFilled" },
+  { name: 'AccountCircle', component: <AccountCircleIcon fontSize="large" />, importPath: "@mui/icons-material/AccountCircle" },
   { name: 'Add', component: <AddIcon fontSize="large" />, importPath: "@mui/icons-material/Add" },
   { name: 'AddLink', component: <AddLinkIcon fontSize="large" />, importPath: "@mui/icons-material/AddLink" },
+  { name: 'AddToDrive', component: <AddToDriveIcon fontSize="large" />, importPath: "@mui/icons-material/AddToDrive" },
   { name: 'AddToPhotos', component: <AddToPhotosIcon fontSize="large" />, importPath: "@mui/icons-material/AddToPhotos" },
-  { name: 'Apps', component: <AppsIcon fontSize="large" />, importPath: "@mui/icons-material/Apps" },
+  { name: 'AdfScanner', component: <AdfScannerIcon fontSize="large" />, importPath: "@mui/icons-material/AdfScanner" },
+  { name: 'Android', component: <AndroidIcon fontSize="large" />, importPath: "@mui/icons-material/Android" },
   { name: 'Announcement', component: <AnnouncementIcon fontSize="large" />, importPath: "@mui/icons-material/Announcement" },
+  { name: 'Apple', component: <AppleIcon fontSize="large" />, importPath: "@mui/icons-material/Apple" },
+  { name: 'Apps', component: <AppsIcon fontSize="large" />, importPath: "@mui/icons-material/Apps" },
+  { name: 'Archive', component: <ArchiveIcon fontSize="large" />, importPath: "@mui/icons-material/Archive" },
+  { name: 'ArrowBack', component: <ArrowBackIcon fontSize="large" />, importPath: "@mui/icons-material/ArrowBack" },
+  { name: 'ArrowBackIos', component: <ArrowBackIosIcon fontSize="large" />, importPath: "@mui/icons-material/ArrowBackIos" },
   { name: 'ArrowCircleDown', component: <ArrowCircleDownIcon fontSize="large" />, importPath: "@mui/icons-material/ArrowCircleDown" },
   { name: 'ArrowCircleLeft', component: <ArrowCircleLeftIcon fontSize="large" />, importPath: "@mui/icons-material/ArrowCircleLeft" },
   { name: 'ArrowCircleRight', component: <ArrowCircleRightIcon fontSize="large" />, importPath: "@mui/icons-material/ArrowCircleRight" },
   { name: 'ArrowCircleUp', component: <ArrowCircleUpIcon fontSize="large" />, importPath: "@mui/icons-material/ArrowCircleUp" },
+  { name: 'ArrowForward', component: <ArrowForwardIcon fontSize="large" />, importPath: "@mui/icons-material/ArrowForward" },
+  { name: 'ArrowForwardIos', component: <ArrowForwardIosIcon fontSize="large" />, importPath: "@mui/icons-material/ArrowForwardIos" },
+  { name: 'ArrowLeft', component: <ArrowLeftIcon fontSize="large" />, importPath: "@mui/icons-material/ArrowLeft" },
+  { name: 'ArrowRight', component: <ArrowRightIcon fontSize="large" />, importPath: "@mui/icons-material/ArrowRight" },
+  { name: 'Article', component: <ArticleIcon fontSize="large" />, importPath: "@mui/icons-material/Article" },
+  { name: 'Assignment', component: <AssignmentIcon fontSize="large" />, importPath: "@mui/icons-material/Assignment" },
   { name: 'Attachment', component: <AttachmentIcon fontSize="large" />, importPath: "@mui/icons-material/Attachment" },
   { name: 'AudioFile', component: <AudioFileIcon fontSize="large" />, importPath: "@mui/icons-material/AudioFile" },
   { name: 'Autorenew', component: <AutorenewIcon fontSize="large" />, importPath: "@mui/icons-material/Autorenew" },
@@ -77,9 +103,9 @@ const icons = [
   { name: 'Block', component: <BlockIcon fontSize="large" />, importPath: "@mui/icons-material/Block" },
   { name: 'Bluetooth', component: <BluetoothIcon fontSize="large" />, importPath: "@mui/icons-material/Bluetooth" },
   { name: 'Bookmark', component: <BookmarkIcon fontSize="large" />, importPath: "@mui/icons-material/Bookmark" },
-  { name: 'BookmarkBorder', component: <BookmarkBorderIcon fontSize="large" />, importPath: "@mui/icons-material/BookmarkBorder" },
   { name: 'BookmarkAdd', component: <BookmarkAddIcon fontSize="large" />, importPath: "@mui/icons-material/BookmarkAdd" },
   { name: 'BookmarkAdded', component: <BookmarkAddedIcon fontSize="large" />, importPath: "@mui/icons-material/BookmarkAdded" },
+  { name: 'BookmarkBorder', component: <BookmarkBorderIcon fontSize="large" />, importPath: "@mui/icons-material/BookmarkBorder" },
   { name: 'BookmarkRemove', component: <BookmarkRemoveIcon fontSize="large" />, importPath: "@mui/icons-material/BookmarkRemove" },
   { name: 'Call', component: <CallIcon fontSize="large" />, importPath: "@mui/icons-material/Call" },
   { name: 'Cast', component: <CastIcon fontSize="large" />, importPath: "@mui/icons-material/Cast" },
@@ -93,9 +119,9 @@ const icons = [
   { name: 'ContentCut', component: <ContentCutIcon fontSize="large" />, importPath: "@mui/icons-material/ContentCut" },
   { name: 'ContentPaste', component: <ContentPasteIcon fontSize="large" />, importPath: "@mui/icons-material/ContentPaste" },
   { name: 'Copyright', component: <CopyrightIcon fontSize="large" />, importPath: "@mui/icons-material/Copyright" },
-  { name: 'Crop', component: <CropIcon fontSize="large" />, importPath: "@mui/icons-material/Crop" },
-  { name: 'CreateNewFolder', component: <CreateNewFolderIcon fontSize="large" />, importPath: "@mui/icons-material/CreateNewFolder" },
   { name: 'Create', component: <CreateIcon fontSize="large" />, importPath: "@mui/icons-material/Create" },
+  { name: 'CreateNewFolder', component: <CreateNewFolderIcon fontSize="large" />, importPath: "@mui/icons-material/CreateNewFolder" },
+  { name: 'Crop', component: <CropIcon fontSize="large" />, importPath: "@mui/icons-material/Crop" },
   { name: 'Delete', component: <DeleteIcon fontSize="large" />, importPath: "@mui/icons-material/Delete" },
   { name: 'DoDisturb', component: <DoDisturbIcon fontSize="large" />, importPath: "@mui/icons-material/DoDisturb" },
   { name: 'Download', component: <DownloadIcon fontSize="large" />, importPath: "@mui/icons-material/Download" },
@@ -108,9 +134,8 @@ const icons = [
   { name: 'InsertLink', component: <InsertLinkIcon fontSize="large" />, importPath: "@mui/icons-material/InsertLink" },
   { name: 'Repeat', component: <RepeatIcon fontSize="large" />, importPath: "@mui/icons-material/Repeat" },
   { name: 'Reply', component: <ReplyIcon fontSize="large" />, importPath: "@mui/icons-material/Reply" },
-  // { name: '', component: <Icon fontSize="large" />, importPath: "@mui/icons-material/" },
-  // ← Thêm icon khác tại đây
 ];
+
 
 export default function IconView() {
   const [open, setOpen] = useState(false);
@@ -128,12 +153,27 @@ export default function IconView() {
 
   return (
     <Box p={4}>
+        <Typography variant="h5" gutterBottom>
+          List of Icons
+        </Typography>
+        <Typography variant="body2" gutterBottom>
+          Click on an icon to see its import statement and usage. To change the color of the icon, there are two ways:
+          <ul>
+            <li>Use the predefined <code>color</code> options supported by MUI in prop: <code>{'<Icon color="primary" />'}</code></li>
+            <li>Use <code>sx</code> for a specific color: <code>{'<Icon sx={{ color: "#f50057" }} />'}</code> </li>
+          </ul>
+        </Typography>
       <Grid container spacing={2}>
         {icons.map((icon, index) => (
           <Grid item xs={3} sm={2} md={1} key={index}>
-            <IconButton onClick={() => handleOpen(icon)}>
-              {icon.component}
-            </IconButton>
+            <Box display="flex" flexDirection="column" alignItems="center">
+              <IconButton onClick={() => handleOpen(icon)}>
+                {icon.component}
+              </IconButton>
+              <Typography variant="caption" sx={{ mt: 1, textAlign: 'center' }}>
+                {icon.name}
+              </Typography>
+            </Box>
           </Grid>
         ))}
       </Grid>
@@ -146,12 +186,15 @@ export default function IconView() {
             bgcolor: 'background.paper', boxShadow: 24, p: 4, borderRadius: 2,
             minWidth: 300,
           }}
+          
         >
+          
           {selectedIcon && (
             <>
               <Box display="flex" justifyContent="center" my={2}>
                 {selectedIcon.component}
               </Box>
+              
               <SyntaxHighlighter language="jsx" style={oneDark}>
                 {`import ${selectedIcon.name}Icon from '${selectedIcon.importPath}';`}
               </SyntaxHighlighter>
