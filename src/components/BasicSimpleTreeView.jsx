@@ -52,6 +52,12 @@ export default function BasicSimpleTreeView() {
       case 'Snackbar':
         navigate('/feedback/snackbar');
         break;
+      case 'DashboardLayout':
+        navigate('/layout/dashboard');
+      break;
+      case 'PageContainer':
+        navigate('/layout/pagecontainer');
+      break;
       default:
         break;
     }
@@ -123,6 +129,17 @@ export default function BasicSimpleTreeView() {
             collapseIcon: { className: 'tree-icon' },
           }}
         />
+        <TreeItem
+          itemId="Layout"
+          label={<span className="tree-label">Layout</span>}
+          slotProps={{
+            expandIcon: { className: 'tree-icon' },
+            collapseIcon: { className: 'tree-icon' },
+          }}
+        >
+          <TreeItem itemId="DashboardLayout" label="Dashboard Layout" />
+          <TreeItem itemId="PageContainer" label="Page Container" />
+        </TreeItem>
       </SimpleTreeView>
     </Box>
   );

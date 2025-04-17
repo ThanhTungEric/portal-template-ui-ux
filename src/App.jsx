@@ -15,7 +15,10 @@ import Introduction from './pages/Introduction.jsx';
 import Login from './pages/Login.jsx';
 import Menu from './pages/Menu.jsx';
 import DialogComponent from './components/DialogComponent.jsx';
-import ProgressComponent from "./components/ProgressComponent.jsx"
+import ProgressComponent from "./components/ProgressComponent.jsx";
+import DashboardLayout from "./components/DashboardLayout.jsx";
+import PageContainer from "./components/PageContainer.jsx"
+
 
 function App() {
   return (
@@ -41,6 +44,8 @@ function App() {
             <Route path="/feedback/dialog" element={<DialogComponent />} />
             <Route path="/feedback/progress" element={<ProgressComponent />} />
             <Route path="/menu" element={<Menu />} />
+            <Route path="/layout/dashboard" element={<DashboardLayout />} />
+            <Route path="/layout/pagecontainer" element={<PageContainer />} />
             <Route path="*" element={<p>Chọn mục bên trái để xem nội dung. v2.</p>} />
           </Routes>
         </main>
