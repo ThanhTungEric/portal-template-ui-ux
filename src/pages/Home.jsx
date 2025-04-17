@@ -1,8 +1,10 @@
-import { Typography, Box, Divider, Chip } from '@mui/material';
+import { Box, Chip, Divider, Typography } from '@mui/material';
 import VGUFullLogo from "../assets/LOGO/VGU Full Color logo-06.png";
+import Footer from "../components/Footer";
 
 export default function Home() {
   return (
+    <>
     <Box p={2}>
       <Box sx={{ textAlign: "center", mb: 4 }}>
         <img src={VGUFullLogo} alt="VGU Logo" style={{ height: 80 }} />
@@ -33,6 +35,8 @@ export default function Home() {
         <li>✅ Copy code nhanh chóng</li>
       </ul>
     </Box>
+    <Footer />
+    </>
   );
 }
 const GermanColorBarSVG = () => {
