@@ -14,7 +14,6 @@ import Input from './pages/Input.jsx';
 import Introduction from './pages/Introduction.jsx';
 import Login from './pages/Login.jsx';
 import Menu from './pages/Menu.jsx';
-import TimelineComponent from "./components/TimelineComponent.jsx"
 import DialogComponent from './components/DialogComponent.jsx';
 import ProgressComponent from "./components/ProgressComponent.jsx"
 
@@ -37,7 +36,6 @@ function App() {
             <Route path="/input/form" element={<FormComponents />} />
             <Route path="/input" element={<Input />} />
             <Route path="/data/icon" element={<IconView />} />
-            <Route path="/data/timeline" element={<TimelineComponent />} />
             <Route path="/feedback/alert" element={<AlertComponent />} />
             <Route path="/feedback/snackbar" element={<SnackbarComponent />} />
             <Route path="/feedback/dialog" element={<DialogComponent />} />
