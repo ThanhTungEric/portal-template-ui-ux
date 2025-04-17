@@ -8,13 +8,13 @@ export default function Home() {
         <img src={VGUFullLogo} alt="VGU Logo" style={{ height: 80 }} />
         <GermanColorBarSVG />
         <Typography variant="h5" fontWeight="bold" mt={2}>
-          Welcome to the Component Library Showcase
+          Welcome to the Component Library
         </Typography>
         <Typography variant="subtitle1" color="text.secondary">
           Dự án nội bộ - Thư viện các component UI tái sử dụng
         </Typography>
         <Typography variant="caption" color="error" display="block" mt={1}>
-          ⚠️ Lưu ý: Hệ thống này chỉ áp dụng cho dự án sử dụng ReactJS.
+          ⚠️ Lưu ý: Hệ thống này chỉ áp dụng cho dự án sử dụng ReactJS & NextJS.
         </Typography>
       </Box>
 

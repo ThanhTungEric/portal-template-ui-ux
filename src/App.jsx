@@ -1,14 +1,17 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
-import AlertComponent from './components/AlertComponent.jsx';
 import BasicSimpleTreeView from './components/BasicSimpleTreeView.jsx';
 import ButtonComponent from './components/ButtonComponent.jsx';
 import FormComponents from './components/FormComponents.jsx';
 import IconView from './components/IconView.jsx';
 import InputComponentsShowcase from './components/InputComponentsShowcase.jsx';
+import ListView from './components/ListView.jsx';
 import LoadingButtonsTransition from './components/LoadingButtonsTransition.jsx';
 import LoginForm from './components/LoginForm.jsx';
-import SnackbarComponent from './components/SnackbarComponent.jsx';
+// import TableView from './components/TableView.jsx';
+import AlertComponent from './components/AlertComponent.jsx';
+
+// Pages
 import Home from './pages/Home.jsx';
 import Input from './pages/Input.jsx';
 import Introduction from './pages/Introduction.jsx';
@@ -17,7 +20,8 @@ import Menu from './pages/Menu.jsx';
 import DialogComponent from './components/DialogComponent.jsx';
 import ProgressComponent from "./components/ProgressComponent.jsx";
 import DashboardLayout from "./components/DashboardLayout.jsx";
-import PageContainer from "./components/PageContainer.jsx"
+import PageContainer from "./components/PageContainer.jsx";
+import SnackbarComponent from './components/PageContainer.jsx';
 
 
 function App() {
@@ -29,7 +33,7 @@ function App() {
         </aside>
         <main className="main-content">
           <Routes>
-          <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home />} />
             <Route path="/introduction" element={<Introduction />} />
             <Route path="/login" element={<Login />} />
             <Route path="/login/form" element={<LoginForm />} />
@@ -43,6 +47,8 @@ function App() {
             <Route path="/feedback/snackbar" element={<SnackbarComponent />} />
             <Route path="/feedback/dialog" element={<DialogComponent />} />
             <Route path="/feedback/progress" element={<ProgressComponent />} />
+            <Route path="/data/list" element={<ListView />} />
+            {/* <Route path="/data/table" element={<TableView />} /> */}
             <Route path="/menu" element={<Menu />} />
             <Route path="/layout/dashboard" element={<DashboardLayout />} />
             <Route path="/layout/pagecontainer" element={<PageContainer />} />
