@@ -9,9 +9,6 @@ import {
     Divider,
     Grid,
     Paper,
-    Snackbar,
-    SnackbarContent,
-    Stack,
     Typography
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
@@ -19,8 +16,11 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { PageContainer } from '@toolpad/core/PageContainer';
 import { AppProvider } from '@toolpad/core/AppProvider';
-import { useDemoRouter } from '@toolpad/core/internal';
 import { useTheme } from '@mui/material/styles';
+import PropTypes from 'prop-types';
+import { Link, useDemoRouter } from '@toolpad/core/internal';
+import { useActivePage } from '@toolpad/core/useActivePage';
+import invariant from 'invariant';
 
 
 // Basic Page Container
@@ -44,7 +44,97 @@ const BasicPageContainer = () => {
       );
 }
 
+// // Dynamic Route
+const NAVIGATION = [
+  {
+    segment: 'inbox',
+    title: 'Orders',
+    pattern: 'inbox/:id',
+  },
+];
+
+const DynamicRoutes =()=> {
+  const router = useDemoRouter('/inbox/123');
+  const theme = useTheme();
+
+  function Content({ router }) {
+    const id = Number(router.pathname.replace('/inbox/', ''));
+
+    const activePage = useActivePage();
+    invariant(activePage, 'No navigation match');
+
+    const title = `Item ${id}`;
+    const path = `${activePage.path}/${id}`;
+    const breadcrumbs = [...activePage.breadcrumbs, { title, path }];
+
+    return (
+      <PageContainer title={title} breadcrumbs={breadcrumbs}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Link href={`/inbox/${id - 1}`}>previous</Link>
+          <Link href={`/inbox/${id + 1}`}>next</Link>
+        </Box>
+      </PageContainer>
+    );
+  }
+
+  Content.propTypes = {
+    router: PropTypes.shape({
+      Link: PropTypes.func,
+      navigate: PropTypes.func.isRequired,
+      pathname: PropTypes.string.isRequired,
+      searchParams: PropTypes.instanceOf(URLSearchParams).isRequired,
+    }).isRequired,
+  };
+
+  let content = (
+    <PageContainer>
+      <Link href={`/inbox/123`}>Item 123</Link>
+    </PageContainer>
+  );
+
+  if (router.pathname.startsWith('/inbox/')) {
+    content = <Content router={router} />;
+  }
+
+  return (
+    <AppProvider navigation={NAVIGATION} router={router} theme={theme}>
+      <Paper sx={{ width: '100%' }}>{content}</Paper>
+    </AppProvider>
+  );
+}
+
+
 const basicPageContainerCode = `
+import * as React from 'react';
+import { PageContainer } from '@toolpad/core/PageContainer';
+import { AppProvider } from '@toolpad/core/AppProvider';
+import { useDemoRouter } from '@toolpad/core/internal';
+import { useTheme } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
+
+const NAVIGATION = [
+  { segment: '', title: 'Home' },
+  { segment: 'orders', title: 'Orders' },
+];
+
+export default function BasicPageContainer() {
+  const router = useDemoRouter('/orders');
+
+  const theme = useTheme();
+
+  return (
+    <AppProvider navigation={NAVIGATION} router={router} theme={theme}>
+      <Paper sx={{ width: '100%' }}>
+        {/* preview-start */}
+        <PageContainer>Page content</PageContainer>
+        {/* preview-end */}
+      </Paper>
+    </AppProvider>
+  );
+}
+`;
+
+const dynamicRoutesPageContainerCode = `
 import * as React from 'react';
 import { PageContainer } from '@toolpad/core/PageContainer';
 import { AppProvider } from '@toolpad/core/AppProvider';
@@ -80,6 +170,11 @@ const pageContainerList = [
         component: <BasicPageContainer />,
         code: basicPageContainerCode
     },
+    {
+        name: 'Dynamic Route Page Container',
+        component: <DynamicRoutes />,
+        code: dynamicRoutesPageContainerCode
+    },
     
 ]
 
@@ -114,7 +209,7 @@ export default function PageContainerComponent() {
             );
         }
     
-    // ✅ THÊM HANDLE COPY
+    // THÊM HANDLE COPY
     const handleCopy = () => {
         navigator.clipboard.writeText(codeString);
         setCopied(true);

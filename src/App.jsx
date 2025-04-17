@@ -21,8 +21,7 @@ import DialogComponent from './components/DialogComponent.jsx';
 import ProgressComponent from "./components/ProgressComponent.jsx";
 import DashboardLayout from "./components/DashboardLayout.jsx";
 import PageContainer from "./components/PageContainer.jsx";
-import SnackbarComponent from './components/PageContainer.jsx';
-
+import SnackbarComponent from './components/SnackbarComponent.jsx';
 
 function App() {
   return (
