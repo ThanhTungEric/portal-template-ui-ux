@@ -2,6 +2,7 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
 import BasicSimpleTreeView from './components/BasicSimpleTreeView.jsx';
 import ButtonComponent from './components/ButtonComponent.jsx';
+import Footer from './components/Footer.jsx';
 import FormComponents from './components/FormComponents.jsx';
 import IconView from './components/IconView.jsx';
 import InputComponentsShowcase from './components/InputComponentsShowcase.jsx';
@@ -41,6 +42,7 @@ function App() {
             <Route path="/data/typography" element={<TypographyView />} />
             <Route path="/data/timeline" element={<TimelineView />} />
             <Route path="/menu" element={<Menu />} />
+            <Route path="/data/footer" element={<Footer />} />
             <Route path="*" element={<p>Chọn mục bên trái để xem nội dung. v2.</p>} />
           </Routes>
         </main>

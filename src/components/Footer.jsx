@@ -14,6 +14,10 @@ import VGU_Logo_Short from "../assets/LOGO/VGU logo trắng.png";
 const Footer = () => {
     return (
         // Bọc toàn bộ nội dung Footer bằng Box để màu nền tràn full width
+        <>
+        <Typography variant="h4" gutterBottom sx={{p:4}}>
+            Footer
+        </Typography>
         <Box sx={{ width: "100%", backgroundColor: "#0A1931", color: "white", py: 5 }}>
             {/* Container giúp nội dung giữ cố định không bị kéo giãn trên màn hình lớn */}
             <Container maxWidth="lg">
@@ -86,6 +90,7 @@ const Footer = () => {
                 </Box>
             </Container>
         </Box>
+        </>
     );
 };
 

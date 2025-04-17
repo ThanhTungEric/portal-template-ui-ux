@@ -3,7 +3,11 @@ import Cloud from '@mui/icons-material/Cloud';
 import { default as ContentCopy, default as ContentCopyIcon } from '@mui/icons-material/ContentCopy';
 import ContentCut from '@mui/icons-material/ContentCut';
 import ContentPaste from '@mui/icons-material/ContentPaste';
+import Logout from '@mui/icons-material/Logout';
+import PersonAdd from '@mui/icons-material/PersonAdd';
+import Settings from '@mui/icons-material/Settings';
 import {
+  Avatar,
   Box,
   Button,
   Dialog,
@@ -11,75 +15,23 @@ import {
   DialogContent,
   Divider,
   Grid,
-  List,
-  ListItemButton,
+  IconButton,
   ListItemIcon,
   ListItemText,
+  Menu,
   MenuItem,
   MenuList,
   Paper,
+  Tooltip,
   Typography,
 } from '@mui/material';
-import React from 'react';
+import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
+import { TreeItem } from '@mui/x-tree-view/TreeItem';
+import React, { useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
-
-// const SimpleTreeView = () => {
-//   return (
-//     <Box sx={{ minHeight: 350, minWidth: 250 }}>
-//       <SimpleTreeView>
-//         <TreeItem itemId="grid" label="Data Grid">
-//           <TreeItem itemId="grid-community" label="@mui/x-data-grid" />
-//           <TreeItem itemId="grid-pro" label="@mui/x-data-grid-pro" />
-//           <TreeItem itemId="grid-premium" label="@mui/x-data-grid-premium" />
-//         </TreeItem>
-//         <TreeItem itemId="pickers" label="Date and Time Pickers">
-//           <TreeItem itemId="pickers-community" label="@mui/x-date-pickers" />
-//           <TreeItem itemId="pickers-pro" label="@mui/x-date-pickers-pro" />
-//         </TreeItem>
-//         <TreeItem itemId="charts" label="Charts">
-//           <TreeItem itemId="charts-community" label="@mui/x-charts" />
-//         </TreeItem>
-//         <TreeItem itemId="tree-view" label="Tree View">
-//           <TreeItem itemId="tree-view-community" label="@mui/x-tree-view" />
-//         </TreeItem>
-//       </SimpleTreeView>
-//     </Box>
-//   );
-// };
-
-// const simpleTreeViewCode = `import * as React from 'react';
-// import Box from '@mui/material/Box';
-// import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
-// import { TreeItem } from '@mui/x-tree-view/TreeItem';
-
-// export default function BasicSimpleTreeView() {
-//   return (
-//     <Box sx={{ minHeight: 352, minWidth: 250 }}>
-//       <SimpleTreeView>
-//         <TreeItem itemId="grid" label="Data Grid">
-//           <TreeItem itemId="grid-community" label="@mui/x-data-grid" />
-//           <TreeItem itemId="grid-pro" label="@mui/x-data-grid-pro" />
-//           <TreeItem itemId="grid-premium" label="@mui/x-data-grid-premium" />
-//         </TreeItem>
-//         <TreeItem itemId="pickers" label="Date and Time Pickers">
-//           <TreeItem itemId="pickers-community" label="@mui/x-date-pickers" />
-//           <TreeItem itemId="pickers-pro" label="@mui/x-date-pickers-pro" />
-//         </TreeItem>
-//         <TreeItem itemId="charts" label="Charts">
-//           <TreeItem itemId="charts-community" label="@mui/x-charts" />
-//         </TreeItem>
-//         <TreeItem itemId="tree-view" label="Tree View">
-//           <TreeItem itemId="tree-view-community" label="@mui/x-tree-view" />
-//         </TreeItem>
-//       </SimpleTreeView>
-//     </Box>
-//   );
-// }
-// `;
-
-// Icon Menu
+// Icon Menu component
 const IconMenu = () => {
   return (
     <Paper sx={{ width: 320, maxWidth: '100%' }}>
@@ -121,7 +73,7 @@ const IconMenu = () => {
       </MenuList>
     </Paper>
   );
-}
+};
 
 // Dense Menu
 const DenseMenu = () => {
@@ -157,76 +109,145 @@ const DenseMenu = () => {
       </MenuList>
     </Paper>
   );
-}
+};
 
-// // Selected Menu
-const SelectedMenu = () => {
-  const options = [
-    'Show some love to MUI',
-    'Show all notification content',
-    'Hide sensitive notification content',
-    'Hide all notification content',
-  ];
-
+// Positioned Menu
+const PositionedMenu = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
   const open = Boolean(anchorEl);
-  const handleClickListItem = (event) => {
+  const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-
-  const handleMenuItemClick = (event, index) => {
-    setSelectedIndex(index);
-    setAnchorEl(null);
-  };
-
   const handleClose = () => {
     setAnchorEl(null);
   };
 
   return (
     <div>
-      <List
-        component="nav"
-        aria-label="Device settings"
-        sx={{ bgcolor: 'background.paper' }}
+      <Button
+        id="demo-positioned-button"
+        aria-controls={open ? 'demo-positioned-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClick}
       >
-        <ListItemButton
-          id="lock-button"
-          aria-haspopup="listbox"
-          aria-controls="lock-menu"
-          aria-label="when device is locked"
-          aria-expanded={open ? 'true' : undefined}
-          onClick={handleClickListItem}
-        >
-          <ListItemText
-            primary="When device is locked"
-            secondary={options[selectedIndex]}
-          />
-        </ListItemButton>
-      </List>
+        Dashboard
+      </Button>
       <Menu
-        id="lock-menu"
+        id="demo-positioned-menu"
+        aria-labelledby="demo-positioned-button"
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
-        MenuListProps={{
-          'aria-labelledby': 'lock-button',
-          role: 'listbox',
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'left',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'left',
         }}
       >
-        {options.map((option, index) => (
-          <MenuItem
-            key={option}
-            disabled={index === 0}
-            selected={index === selectedIndex}
-            onClick={(event) => handleMenuItemClick(event, index)}
-          >
-            {option}
-          </MenuItem>
-        ))}
+        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem onClick={handleClose}>My account</MenuItem>
+        <MenuItem onClick={handleClose}>Logout</MenuItem>
       </Menu>
     </div>
+  );
+}
+
+// Account Menu
+const AccountMenu = () => {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  return (
+    <React.Fragment>
+      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+        <Typography sx={{ minWidth: 100 }}>Contact</Typography>
+        <Typography sx={{ minWidth: 100 }}>Profile</Typography>
+        <Tooltip title="Account settings">
+          <IconButton
+            onClick={handleClick}
+            size="small"
+            sx={{ ml: 2 }}
+            aria-controls={open ? 'account-menu' : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? 'true' : undefined}
+          >
+            <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+          </IconButton>
+        </Tooltip>
+      </Box>
+      <Menu
+        anchorEl={anchorEl}
+        id="account-menu"
+        open={open}
+        onClose={handleClose}
+        onClick={handleClose}
+        slotProps={{
+          paper: {
+            elevation: 0,
+            sx: {
+              overflow: 'visible',
+              filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+              mt: 1.5,
+              '& .MuiAvatar-root': {
+                width: 32,
+                height: 32,
+                ml: -0.5,
+                mr: 1,
+              },
+              '&::before': {
+                content: '""',
+                display: 'block',
+                position: 'absolute',
+                top: 0,
+                right: 14,
+                width: 10,
+                height: 10,
+                bgcolor: 'background.paper',
+                transform: 'translateY(-50%) rotate(45deg)',
+                zIndex: 0,
+              },
+            },
+          },
+        }}
+        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+      >
+        <MenuItem onClick={handleClose}>
+          <Avatar /> Profile
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <Avatar /> My account
+        </MenuItem>
+        <Divider />
+        <MenuItem onClick={handleClose}>
+          <ListItemIcon>
+            <PersonAdd fontSize="small" />
+          </ListItemIcon>
+          Add another account
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <ListItemIcon>
+            <Settings fontSize="small" />
+          </ListItemIcon>
+          Settings
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <ListItemIcon>
+            <Logout fontSize="small" />
+          </ListItemIcon>
+          Logout
+        </MenuItem>
+      </Menu>
+    </React.Fragment>
   );
 }
 
@@ -332,166 +353,309 @@ export default function DenseMenu() {
 }
 `;
 
+const positionedMenuCode = `import * as React from 'react';
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
-// const selectedMenuCode = `import * as React from 'react';
-// import List from '@mui/material/List';
-// import ListItemButton from '@mui/material/ListItemButton';
-// import ListItemText from '@mui/material/ListItemText';
-// import MenuItem from '@mui/material/MenuItem';
-// import Menu from '@mui/material/Menu';
+export default function PositionedMenu() {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
-// const options = [
-//   'Show some love to MUI',
-//   'Show all notification content',
-//   'Hide sensitive notification content',
-//   'Hide all notification content',
-// ];
+  return (
+    <div>
+      <Button
+        id="demo-positioned-button"
+        aria-controls={open ? 'demo-positioned-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClick}
+      >
+        Dashboard
+      </Button>
+      <Menu
+        id="demo-positioned-menu"
+        aria-labelledby="demo-positioned-button"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'left',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'left',
+        }}
+      >
+        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem onClick={handleClose}>My account</MenuItem>
+        <MenuItem onClick={handleClose}>Logout</MenuItem>
+      </Menu>
+    </div>
+  );
+}
+`;
 
-// export default function SimpleListMenu() {
-//   const [anchorEl, setAnchorEl] = React.useState(null);
-//   const [selectedIndex, setSelectedIndex] = React.useState(1);
-//   const open = Boolean(anchorEl);
-//   const handleClickListItem = (event) => {
-//     setAnchorEl(event.currentTarget);
-//   };
+const accountMenuCode = `import * as React from 'react';
+import Box from '@mui/material/Box';
+import Avatar from '@mui/material/Avatar';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Tooltip from '@mui/material/Tooltip';
+import PersonAdd from '@mui/icons-material/PersonAdd';
+import Settings from '@mui/icons-material/Settings';
+import Logout from '@mui/icons-material/Logout';
 
-//   const handleMenuItemClick = (event, index) => {
-//     setSelectedIndex(index);
-//     setAnchorEl(null);
-//   };
+export default function AccountMenu() {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  return (
+    <React.Fragment>
+      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+        <Typography sx={{ minWidth: 100 }}>Contact</Typography>
+        <Typography sx={{ minWidth: 100 }}>Profile</Typography>
+        <Tooltip title="Account settings">
+          <IconButton
+            onClick={handleClick}
+            size="small"
+            sx={{ ml: 2 }}
+            aria-controls={open ? 'account-menu' : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? 'true' : undefined}
+          >
+            <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+          </IconButton>
+        </Tooltip>
+      </Box>
+      <Menu
+        anchorEl={anchorEl}
+        id="account-menu"
+        open={open}
+        onClose={handleClose}
+        onClick={handleClose}
+        slotProps={{
+          paper: {
+            elevation: 0,
+            sx: {
+              overflow: 'visible',
+              filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+              mt: 1.5,
+              '& .MuiAvatar-root': {
+                width: 32,
+                height: 32,
+                ml: -0.5,
+                mr: 1,
+              },
+              '&::before': {
+                content: '""',
+                display: 'block',
+                position: 'absolute',
+                top: 0,
+                right: 14,
+                width: 10,
+                height: 10,
+                bgcolor: 'background.paper',
+                transform: 'translateY(-50%) rotate(45deg)',
+                zIndex: 0,
+              },
+            },
+          },
+        }}
+        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+      >
+        <MenuItem onClick={handleClose}>
+          <Avatar /> Profile
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <Avatar /> My account
+        </MenuItem>
+        <Divider />
+        <MenuItem onClick={handleClose}>
+          <ListItemIcon>
+            <PersonAdd fontSize="small" />
+          </ListItemIcon>
+          Add another account
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <ListItemIcon>
+            <Settings fontSize="small" />
+          </ListItemIcon>
+          Settings
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <ListItemIcon>
+            <Logout fontSize="small" />
+          </ListItemIcon>
+          Logout
+        </MenuItem>
+      </Menu>
+    </React.Fragment>
+  );
+}
+`;
 
-//   const handleClose = () => {
-//     setAnchorEl(null);
-//   };
+// BasicSimpleTreeView
+const BasicSimpleTreeView = () => {
+  return (
+    <Box sx={{ minHeight: 200, minWidth: 250 }}>
+      <SimpleTreeView>
+        <TreeItem itemId="grid" label="Data Grid">
+          <TreeItem itemId="grid-community" label="@mui/x-data-grid" />
+          <TreeItem itemId="grid-pro" label="@mui/x-data-grid-pro" />
+          <TreeItem itemId="grid-premium" label="@mui/x-data-grid-premium" />
+        </TreeItem>
+        <TreeItem itemId="pickers" label="Date and Time Pickers">
+          <TreeItem itemId="pickers-community" label="@mui/x-date-pickers" />
+          <TreeItem itemId="pickers-pro" label="@mui/x-date-pickers-pro" />
+        </TreeItem>
+        <TreeItem itemId="charts" label="Charts">
+          <TreeItem itemId="charts-community" label="@mui/x-charts" />
+        </TreeItem>
+        <TreeItem itemId="tree-view" label="Tree View">
+          <TreeItem itemId="tree-view-community" label="@mui/x-tree-view" />
+        </TreeItem>
+      </SimpleTreeView>
+    </Box>
+  );
+}
 
-//   return (
-//     <div>
-//       <List
-//         component="nav"
-//         aria-label="Device settings"
-//         sx={{ bgcolor: 'background.paper' }}
-//       >
-//         <ListItemButton
-//           id="lock-button"
-//           aria-haspopup="listbox"
-//           aria-controls="lock-menu"
-//           aria-label="when device is locked"
-//           aria-expanded={open ? 'true' : undefined}
-//           onClick={handleClickListItem}
-//         >
-//           <ListItemText
-//             primary="When device is locked"
-//             secondary={options[selectedIndex]}
-//           />
-//         </ListItemButton>
-//       </List>
-//       <Menu
-//         id="lock-menu"
-//         anchorEl={anchorEl}
-//         open={open}
-//         onClose={handleClose}
-//         MenuListProps={{
-//           'aria-labelledby': 'lock-button',
-//           role: 'listbox',
-//         }}
-//       >
-//         {options.map((option, index) => (
-//           <MenuItem
-//             key={option}
-//             disabled={index === 0}
-//             selected={index === selectedIndex}
-//             onClick={(event) => handleMenuItemClick(event, index)}
-//           >
-//             {option}
-//           </MenuItem>
-//         ))}
-//       </Menu>
-//     </div>
-//   );
-// }
-// `;
+const menuList = [
+    {
+        name: 'Icon Menu',
+        component: <IconMenu />,
+        code: iconMenuCode,
+    },
+    {
+        name: 'Dense Menu',
+        component: <DenseMenu />,
+        code: denseMenuCode,
+    },
+    {
+        name: 'Positioned Menu',
+        component: <PositionedMenu />,
+        code: positionedMenuCode,
+    },
+    {
+        name: 'Account Menu',
+        component: <AccountMenu />,
+        code: accountMenuCode,
+    },
+    
+];
 
-const menuVariants = [
-  {
-    name: 'Icon Menu',
-    component: <IconMenu />,
-    code: iconMenuCode
-  },
-  {
-    name: 'Dense Menu',
-    component: <DenseMenu />,
-    code: denseMenuCode
-  },
-  // {
-  //   name: 'Selected Menu',
-  //   component: <SelectedMenu />,
-  //   code: '0',
-  // }
+const treeList = [
+    {
+        name: 'Basic Simple Tree View',
+        component: <BasicSimpleTreeView />,
+        code: `0`
+    }
 ]
 
-export default function Menu() {
-      const [open, setOpen] = React.useState(false);
-      const [copied, setCopied] = React.useState(false);
-      const [codeString, setCodeString] = React.useState('');
-  
-      const handleOpen = (code) => {
-          setCodeString(code);
-          setOpen(true);
-      };
-  
-      const handleClose = () => {
-          setOpen(false);
-      };
-  
-  
-      // ✅ THÊM HANDLE COPY
-      const handleCopy = () => {
-          navigator.clipboard.writeText(codeString);
-          setCopied(true);
-          setTimeout(() => setCopied(false), 1500);
-      };
+export default function MenuView() {
+    const [open, setOpen] = useState(false);
+    const [copied, setCopied] = useState(false);
+    const [codeString, setCodeString] = useState('');
     
-      return (
-          <Box p={2} mx={4} my={2}>
-              <Typography variant="h4" gutterBottom>
-                  Menu
-              </Typography>
-              <Typography variant="body1" gutterBottom>
-                  List of Menu
-              </Typography>
-              <Grid container spacing={8}>
-                  {menuVariants.map((item, idx) => (
-                      <Grid item xs={12} md={6} key={idx}>
-                      <Paper elevation={3} sx={{ p: 3, mt: 2, width: 320, height: 380 }}>
-                          <Typography variant="h6" gutterBottom>
-                          {item.name}
-                          </Typography>
-                          {item.component}
-                          <Divider sx={{ my: 2 }} />
-                          <Button variant="outlined" onClick={() => handleOpen(item.code)}>
-                          Code
-                          </Button>
-                      </Paper>
-                      </Grid>
-                  ))}
+    const handleOpen = (code) => {
+        setCodeString(code);
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleCopy = () => {
+        navigator.clipboard.writeText(codeString);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1500);
+    };
+
+    return (
+      <>
+        <Box p={2} mx={10} my={4}>
+          <Typography variant="h4" gutterBottom>
+            Menu Component
+          </Typography>
+    
+          <Grid container spacing={8}>
+            {menuList.map((item, idx) => (
+              <Grid item xs={12} md={6} key={idx}>
+                <Paper elevation={3} sx={{ p: 4, minWidth: 330, minHeight: 280 }}>
+                  <Typography variant="h6" gutterBottom>
+                    {item.name}
+                  </Typography>
+                  {item.component}
+                  <Divider sx={{ my: 2 }} />
+                  <Button variant="outlined" onClick={() => handleOpen(item.code)}>
+                    Code
+                  </Button>
+                </Paper>
               </Grid>
-              {/* ✅ Popup xem mã nguồn */}
-              <Dialog open={open} onClose={handleClose} fullWidth maxWidth="md">
-                  <DialogContent dividers>
-                      <SyntaxHighlighter language="jsx" style={oneDark} wrapLongLines showLineNumbers>
-                      {codeString}
-                      </SyntaxHighlighter>
-                  </DialogContent>
-  
-                  <DialogActions>
-                      <Button onClick={handleCopy} startIcon={<ContentCopyIcon />}>
-                      {copied ? 'Đã copy!' : 'Copy code'}
-                      </Button>
-                      <Button onClick={handleClose} color="secondary">
-                      Đóng
-                      </Button>
-                  </DialogActions>
-              </Dialog>
-          </Box>
-      );
+            ))}
+          </Grid>
+    
+          <Typography variant="h4" gutterBottom mt={6}>
+            Tree Component
+          </Typography>
+    
+          <Grid container spacing={8}>
+            {treeList.map((item, idx) => (
+              <Grid item xs={12} md={6} key={idx}>
+                <Paper elevation={3} sx={{ p: 4, minWidth: 330, minHeight: 280 }}>
+                  <Typography variant="h6" gutterBottom>
+                    {item.name}
+                  </Typography>
+                  {item.component}
+                  <Divider sx={{ my: 2 }} />
+                  <Button variant="outlined" onClick={() => handleOpen(item.code)}>
+                    Code
+                  </Button>
+                </Paper>
+              </Grid>
+            ))}
+          </Grid>
+    
+          <Dialog open={open} onClose={handleClose} fullWidth maxWidth="md">
+            <DialogContent dividers>
+              <SyntaxHighlighter
+                language="jsx"
+                style={oneDark}
+                wrapLongLines
+                showLineNumbers
+              >
+                {codeString}
+              </SyntaxHighlighter>
+            </DialogContent>
+    
+            <DialogActions>
+              <Button onClick={handleCopy} startIcon={<ContentCopyIcon />}>
+                {copied ? 'Đã copy!' : 'Copy code'}
+              </Button>
+              <Button onClick={handleClose} color="secondary">
+                Đóng
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </Box>
+      </>
+    );
 }
