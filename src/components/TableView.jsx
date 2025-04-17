@@ -1,6 +1,7 @@
 import {
     Box,
     Button,
+    CircularProgress,
     Dialog,
     DialogActions,
     DialogContent,
@@ -15,7 +16,7 @@ import {
     TableRow,
     Typography,
 } from '@mui/material';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { DataGrid } from '@mui/x-data-grid';
@@ -252,9 +253,15 @@ const componentTable = [
 ]
 
 export default function TableView() {
-    const [open, setOpen] = React.useState(false);
-    const [copied, setCopied] = React.useState(false);
-    const [codeString, setCodeString] = React.useState('');
+    const [open, setOpen] = useState(false);
+    const [copied, setCopied] = useState(false);
+    const [codeString, setCodeString] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        const timer = setTimeout(() => setLoading(false), 800); // mô phỏng tải dữ liệu
+        return () => clearTimeout(timer);
+    }, []);
 
     const handleOpen = (code) => {
         setCodeString(code);
@@ -265,13 +272,20 @@ export default function TableView() {
         setOpen(false);
     };
 
-
-    // ✅ THÊM HANDLE COPY
     const handleCopy = () => {
         navigator.clipboard.writeText(codeString);
         setCopied(true);
         setTimeout(() => setCopied(false), 1500);
     };
+
+    if (loading) {
+        return (
+        <Box p={4} textAlign="center">
+            <Typography variant="h6" gutterBottom>Đang tải các table...</Typography>
+            <CircularProgress color="primary" />
+        </Box>
+        );
+    }
 
     return (
         <Box p={2} mx={4} my={2}>

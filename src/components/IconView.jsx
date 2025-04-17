@@ -1,5 +1,5 @@
-import { Box, Grid, IconButton, List, ListItem, Modal, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import { Box, CircularProgress, Grid, IconButton, List, ListItem, Modal, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
@@ -138,70 +138,90 @@ const icons = [
 
 
 export default function IconView() {
-  const [open, setOpen] = useState(false);
-  const [selectedIcon, setSelectedIcon] = useState(null);
+    const [open, setOpen] = useState(false);
+    const [selectedIcon, setSelectedIcon] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-  const handleOpen = (icon) => {
-    setSelectedIcon(icon);
-    setOpen(true);
-  };
+    useEffect(() => {
+        const timer = setTimeout(() => setLoading(false), 800); // mô phỏng tải dữ liệu
+        return () => clearTimeout(timer);
+    }, []);
 
-  const handleClose = () => {
-    setOpen(false);
-    setSelectedIcon(null);
-  };
+    const handleOpen = (icon) => {
+      setSelectedIcon(icon);
+      setOpen(true);
+    };
 
-  return (
-    <Box p={4}>
-        <Typography variant="h4" gutterBottom>
-          List of Icons
-        </Typography>
-        <Typography variant="body2" gutterBottom>
-          Click on an icon to see its import statement and usage. To change the color of the icon, there are two ways:
-          <List>
-            <ListItem>Use the predefined <code>color</code> options supported by MUI in prop: <code>{'<Icon color="primary" />'}</code></ListItem>
-            <ListItem>Use <code>sx</code> for a specific color: <code>{'<Icon sx={{ color: "#f50057" }} />'}</code> </ListItem>
-          </List>
-        </Typography>
-      <Grid container spacing={2}>
-        {icons.map((icon, index) => (
-          <Grid item xs={3} sm={2} md={1} key={index}>
-            <Box display="flex" flexDirection="column" alignItems="center">
-              <IconButton onClick={() => handleOpen(icon)}>
-                {icon.component}
-              </IconButton>
-              <Typography variant="caption" sx={{ mt: 1, textAlign: 'center' }}>
-                {icon.name}
-              </Typography>
-            </Box>
-          </Grid>
-        ))}
-      </Grid>
+    const handleClose = () => {
+      setOpen(false);
+      setSelectedIcon(null);
+    };
 
-      <Modal open={open} onClose={handleClose}>
-        <Box
-          sx={{
-            position: 'absolute', top: '50%', left: '50%',
-            transform: 'translate(-50%, -50%)',
-            bgcolor: 'background.paper', boxShadow: 24, p: 4, borderRadius: 2,
-            minWidth: 300,
-          }}
-          
-        >
-          
-          {selectedIcon && (
-            <>
-              <Box display="flex" justifyContent="center" my={2}>
-                {selectedIcon.component}
-              </Box>
-              
-              <SyntaxHighlighter language="jsx" style={oneDark}>
-                {`import ${selectedIcon.name}Icon from '${selectedIcon.importPath}';`}
-              </SyntaxHighlighter>
-            </>
-          )}
+    if (loading) {
+        return (
+        <Box p={4} textAlign="center">
+            <Typography variant="h6" gutterBottom>Đang tải các icon...</Typography>
+            <CircularProgress color="primary" />
         </Box>
-      </Modal>
-    </Box>
-  );
+        );
+    }
+
+    return (
+      <Box p={4}>
+          <Typography variant="h4" gutterBottom>
+            List of Icons
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            Click on an icon to see its import statement and usage. To change the color of the icon, there are two ways:
+            <List>
+              <ListItem>Use the predefined color options supported by MUI in prop: <SyntaxHighlighter language="jsx" customStyle={{ padding: "2px", marginLeft: "2px"}}>
+              {'<Icon color="primary" />'}
+            </SyntaxHighlighter></ListItem>
+              <ListItem>Use sx for a specific color: <SyntaxHighlighter language="jsx" customStyle={{ padding: "2px", marginLeft: "2px"}}>
+              {'<Icon xs={{color:"#f50057"}} />'}
+            </SyntaxHighlighter>
+              </ListItem>
+            </List>
+          </Typography>
+        <Grid container spacing={2}>
+          {icons.map((icon, index) => (
+            <Grid item xs={3} sm={2} md={1} key={index}>
+              <Box display="flex" flexDirection="column" alignItems="center">
+                <IconButton onClick={() => handleOpen(icon)}>
+                  {icon.component}
+                </IconButton>
+                <Typography variant="caption" sx={{ mt: 1, textAlign: 'center' }}>
+                  {icon.name}
+                </Typography>
+              </Box>
+            </Grid>
+          ))}
+        </Grid>
+
+        <Modal open={open} onClose={handleClose}>
+          <Box
+            sx={{
+              position: 'absolute', top: '50%', left: '50%',
+              transform: 'translate(-50%, -50%)',
+              bgcolor: 'background.paper', boxShadow: 24, p: 4, borderRadius: 2,
+              minWidth: 300,
+            }}
+            
+          >
+            
+            {selectedIcon && (
+              <>
+                <Box display="flex" justifyContent="center" my={2}>
+                  {selectedIcon.component}
+                </Box>
+                
+                <SyntaxHighlighter language="jsx" style={oneDark}>
+                  {`import ${selectedIcon.name}Icon from '${selectedIcon.importPath}';`}
+                </SyntaxHighlighter>
+              </>
+            )}
+          </Box>
+        </Modal>
+      </Box>
+    );
 }

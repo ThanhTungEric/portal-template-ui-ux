@@ -15,6 +15,7 @@ import {
 import {
     Box,
     Button,
+    CircularProgress,
     Dialog,
     DialogActions,
     DialogContent,
@@ -23,7 +24,7 @@ import {
     Paper,
     Typography
 } from '@mui/material';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
@@ -642,63 +643,77 @@ const timelineVariants = [
 ]
 
 export default function TimelineView() {
-    const [open, setOpen] = React.useState(false);
-        const [copied, setCopied] = React.useState(false);
-        const [codeString, setCodeString] = React.useState('');
-    
-        const handleOpen = (code) => {
-            setCodeString(code);
-            setOpen(true);
-        };
-    
-        const handleClose = () => {
-            setOpen(false);
-        };
-    
-    
-        // ✅ THÊM HANDLE COPY
-        const handleCopy = () => {
-            navigator.clipboard.writeText(codeString);
-            setCopied(true);
-            setTimeout(() => setCopied(false), 1500);
-        };
-    
+    const [open, setOpen] = useState(false);
+    const [copied, setCopied] = useState(false);
+    const [codeString, setCodeString] = useState('');
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => setLoading(false), 800); // mô phỏng tải dữ liệu
+        return () => clearTimeout(timer);
+    }, []);
+
+    const handleOpen = (code) => {
+        setCodeString(code);
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+
+    const handleCopy = () => {
+        navigator.clipboard.writeText(codeString);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1500);
+    };
+
+    if (loading) {
         return (
-            <Box p={2} mx={4} my={2}>
-                <Grid container spacing={8}>
-                    {timelineVariants.map((item, idx) => (
-                        <Grid item xs={12} md={6} key={idx}>
-                        <Paper elevation={3} sx={{ p: 4, width: 300, height: 460 }}>
-                            <Typography variant="h6" gutterBottom>
-                            {item.name}
-                            </Typography>
-                            {item.component}
-                            <Divider sx={{ my: 2 }} />
-                            <Button variant="outlined" onClick={() => handleOpen(item.code)}>
-                            Code
-                            </Button>
-                        </Paper>
-                        </Grid>
-                    ))}
-                </Grid>
-                {/* ✅ Popup xem mã nguồn */}
-                <Dialog open={open} onClose={handleClose} fullWidth maxWidth="md">
-                    <DialogContent dividers>
-                        <SyntaxHighlighter language="jsx" style={oneDark} wrapLongLines showLineNumbers>
-                        {codeString}
-                        </SyntaxHighlighter>
-                    </DialogContent>
-    
-                    <DialogActions>
-                        <Button onClick={handleCopy} startIcon={<ContentCopyIcon />}>
-                        {copied ? 'Đã copy!' : 'Copy code'}
-                        </Button>
-                        <Button onClick={handleClose} color="secondary">
-                        Đóng
-                        </Button>
-                    </DialogActions>
-                </Dialog>
-            </Box>
+        <Box p={4} textAlign="center">
+            <Typography variant="h6" gutterBottom>Đang tải các timeline...</Typography>
+            <CircularProgress color="primary" />
+        </Box>
         );
+    }
+    
+    return (
+        <Box p={2} mx={4} my={2}>
+            <Grid container spacing={8}>
+                {timelineVariants.map((item, idx) => (
+                    <Grid item xs={12} md={6} key={idx}>
+                    <Paper elevation={3} sx={{ p: 4, width: 300, height: 460 }}>
+                        <Typography variant="h6" gutterBottom>
+                        {item.name}
+                        </Typography>
+                        {item.component}
+                        <Divider sx={{ my: 2 }} />
+                        <Button variant="outlined" onClick={() => handleOpen(item.code)}>
+                        Code
+                        </Button>
+                    </Paper>
+                    </Grid>
+                ))}
+            </Grid>
+            {/* ✅ Popup xem mã nguồn */}
+            <Dialog open={open} onClose={handleClose} fullWidth maxWidth="md">
+                <DialogContent dividers>
+                    <SyntaxHighlighter language="jsx" style={oneDark} wrapLongLines showLineNumbers>
+                    {codeString}
+                    </SyntaxHighlighter>
+                </DialogContent>
+
+                <DialogActions>
+                    <Button onClick={handleCopy} startIcon={<ContentCopyIcon />}>
+                    {copied ? 'Đã copy!' : 'Copy code'}
+                    </Button>
+                    <Button onClick={handleClose} color="secondary">
+                    Đóng
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        </Box>
+    );
 }
 
