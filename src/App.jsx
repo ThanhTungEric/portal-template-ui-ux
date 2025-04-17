@@ -1,5 +1,8 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
+
+// Components
+import AlertComponent from './components/AlertComponent.jsx';
 import BasicSimpleTreeView from './components/BasicSimpleTreeView.jsx';
 import ButtonComponent from './components/ButtonComponent.jsx';
 import Footer from './components/Footer.jsx';
@@ -12,6 +15,8 @@ import LoginForm from './components/LoginForm.jsx';
 import TableView from './components/TableView.jsx';
 import TimelineView from './components/TimelineView.jsx';
 import TypographyView from './components/TypographyView.jsx';
+
+// Pages
 import Home from './pages/Home.jsx';
 import Input from './pages/Input.jsx';
 import Introduction from './pages/Introduction.jsx';
@@ -27,7 +32,7 @@ function App() {
         </aside>
         <main className="main-content">
           <Routes>
-          <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home />} />
             <Route path="/introduction" element={<Introduction />} />
             <Route path="/login" element={<Login />} />
             <Route path="/login/form" element={<LoginForm />} />
@@ -37,6 +42,7 @@ function App() {
             <Route path="/input/form" element={<FormComponents />} />
             <Route path="/input" element={<Input />} />
             <Route path="/data/icon" element={<IconView />} />
+            <Route path="/feedback/alert" element={<AlertComponent />} />
             <Route path="/data/list" element={<ListView />} />
             <Route path="/data/table" element={<TableView />} />
             <Route path="/data/typography" element={<TypographyView />} />
@@ -44,7 +50,7 @@ function App() {
             <Route path="/menu" element={<Menu />} />
             <Route path="/data/footer" element={<Footer />} />
             <Route path="*" element={<p>Chọn mục bên trái để xem nội dung. v2.</p>} />
-          </Routes>
+          </Routes> 
         </main>
       </div>
     </Router>
