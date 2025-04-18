@@ -50,11 +50,11 @@ export default function BasicSimpleTreeView() {
       case 'Timeline':
         navigate('/data/timeline');
         break;
-      case 'Footer':
-        navigate('/data/footer');
-        break;
       case 'Menu':
         navigate('/menu');
+        break;
+      case 'Footer':
+        navigate('/menu/footer');
         break;
       case 'Alert':
         navigate('/feedback/alert');
@@ -110,7 +110,6 @@ export default function BasicSimpleTreeView() {
           <TreeItem itemId="Table" label="Table" />
           <TreeItem itemId="Typography" label="Typography" />
           <TreeItem itemId="Timeline" label="Timeline" />
-          <TreeItem itemId="Footer" label="Footer" />
         </TreeItem>
         <TreeItem
           itemId="Feedback"
@@ -120,7 +119,7 @@ export default function BasicSimpleTreeView() {
           <TreeItem itemId="Alert" label="Alert" />
           <TreeItem itemId="Dialog" label="Dialog" />
           <TreeItem itemId="Progress" label="Progress" />
-          <TreeItem itemId="snackbar" label="Snackbar" />
+          <TreeItem itemId="Snackbar" label="Snackbar" />
         </TreeItem>
         <TreeItem
           itemId="Menu"
@@ -130,6 +129,7 @@ export default function BasicSimpleTreeView() {
             collapseIcon: { className: 'tree-icon' },
           }}
         >
+          <TreeItem itemId="Footer" label="Footer" />
         </TreeItem>
       </SimpleTreeView>
     </Box>

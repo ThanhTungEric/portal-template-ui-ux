@@ -119,7 +119,7 @@ export default Footer;`;
 
 const Footer = () => {
     const location = useLocation();
-    const isCodeRoute = location.pathname === "/data/footer"; 
+    const isCodeRoute = location.pathname === "/menu/footer";
 
     const [open, setOpen] = React.useState(false);
     const [copied, setCopied] = React.useState(false);

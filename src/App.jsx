@@ -48,7 +48,7 @@ function App() {
             <Route path="/data/typography" element={<TypographyView />} />
             <Route path="/data/timeline" element={<TimelineView />} />
             <Route path="/menu" element={<Menu />} />
-            <Route path="/data/footer" element={<Footer />} />
+            <Route path="/menu/footer" element={<Footer />} />
             <Route path="*" element={<p>Chọn mục bên trái để xem nội dung. v2.</p>} />
           </Routes> 
         </main>
