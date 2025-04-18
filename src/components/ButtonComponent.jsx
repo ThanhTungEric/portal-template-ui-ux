@@ -1,222 +1,219 @@
-import React, { useState, useEffect } from 'react';
-import {
-  Button,
-  IconButton,
-  Typography,
-  Grid,
-  Box,
-  Paper,
-  Divider,
-  Stack,
-  CircularProgress
-} from '@mui/material';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import DeleteIcon from '@mui/icons-material/Delete';
-import SendIcon from '@mui/icons-material/Send';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import SaveIcon from '@mui/icons-material/Save';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import * as React from 'react';
+import { createTheme, styled } from '@mui/material/styles';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import DescriptionIcon from '@mui/icons-material/Description';
+import LayersIcon from '@mui/icons-material/Layers';
+import { AppProvider } from '@toolpad/core/AppProvider';
+import { DashboardLayout } from '@toolpad/core/DashboardLayout';
+import { PageContainer } from '@toolpad/core/PageContainer';
+import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import IconButton from '@mui/material/IconButton';
+import CodeIcon from '@mui/icons-material/Code';
+import CloseIcon from '@mui/icons-material/Close';
 
-const buttonVariants = [
+// display Dashboard demo
+const NAVIGATION = [
   {
-    label: 'Text',
-    variant: 'text',
-    code: `import { Button } from '@mui/material';
-
-<Button variant="text">Text</Button>`
+    kind: 'header',
+    title: 'Main items',
   },
   {
-    label: 'Contained',
-    variant: 'contained',
-    code: `import { Button } from '@mui/material';
-
-<Button variant="contained">
-  Contained
-</Button>`
+    segment: 'dashboard',
+    title: 'Dashboard',
+    icon: <DashboardIcon />,
   },
   {
-    label: 'Outlined',
-    variant: 'outlined',
-    code: `import { Button } from '@mui/material';
-
-<Button variant="outlined">
-  Outlined
-</Button>`
+    segment: 'orders',
+    title: 'Orders',
+    icon: <ShoppingCartIcon />,
   },
   {
-    label: 'Disabled',
-    variant: 'outlined',
-    disabled: true,
-    code: `import { Button } from '@mui/material';
-
-<Button variant="outlined" disabled>
-  Disabled
-</Button>`
+    kind: 'divider',
   },
   {
-    label: 'Outlined w/ Icon',
-    customRender: (
-      <Button variant="outlined" startIcon={<DeleteIcon />}>
-        Delete
-      </Button>
-    ),
-    code: `import { Button } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-
-<Button variant="outlined" startIcon={<DeleteIcon />}>
-  Delete
-</Button>`
+    kind: 'header',
+    title: 'Analytics',
   },
   {
-    label: 'Contained w/ Icon',
-    customRender: (
-      <Button variant="contained" endIcon={<SendIcon />}>
-        Send
-      </Button>
-    ),
-    code: `import { Button } from '@mui/material';
-import SendIcon from '@mui/icons-material/Send';
-
-<Button variant="contained" endIcon={<SendIcon />}>
-  Send
-</Button>`
+    segment: 'reports',
+    title: 'Reports',
+    icon: <BarChartIcon />,
+    children: [
+      {
+        segment: 'sales',
+        title: 'Sales',
+        icon: <DescriptionIcon />,
+      },
+      {
+        segment: 'traffic',
+        title: 'Traffic',
+        icon: <DescriptionIcon />,
+      },
+    ],
   },
   {
-    label: 'Upload Button',
-    customRender: (
-      <Button
-        component="label"
-        role={undefined}
-        variant="contained"
-        tabIndex={-1}
-        startIcon={<CloudUploadIcon />}
-      >
-        Upload files
-        <input
-          type="file"
-          multiple
-          hidden
-          onChange={(event) => console.log(event.target.files)}
-        />
-      </Button>
-    ),
-    code: `import { Button } from '@mui/material';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-
-<Button
-  component="label"
-  role={undefined}
-  variant="contained"
-  tabIndex={-1}
-  startIcon={<CloudUploadIcon />}
->
-  Upload files
-  <input
-    type="file"
-    multiple
-    hidden
-    onChange={(event) => console.log(event.target.files)}
-  />
-</Button>`
+    segment: 'integrations',
+    title: 'Integrations',
+    icon: <LayersIcon />,
   },
-  {
-    label: 'Save',
-    customRender: (
-      <Button variant="contained" color="secondary" startIcon={<SaveIcon />}>
-        Save
-      </Button>
-    ),
-    code: `import { Button } from '@mui/material';
-import SaveIcon from '@mui/icons-material/Save';
-  
-<Button variant="contained" color="secondary" startIcon={<SaveIcon />}>
-  Save
-</Button>`
-  }
 ];
 
-export default function ButtonComponent() {
-  const [copiedIndex, setCopiedIndex] = useState(null);
-  const [loading, setLoading] = useState(true);
+const demoTheme = createTheme({
+  colorSchemes: { light: true, dark: true },
+  cssVariables: {
+    colorSchemeSelector: 'class',
+  },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 600,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
+});
 
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 800); // mô phỏng tải dữ liệu
-    return () => clearTimeout(timer);
-  }, []);
+function useDemoRouter(initialPath) {
+  const [pathname, setPathname] = React.useState(initialPath);
 
-  const handleCopy = (code, index) => {
-    navigator.clipboard.writeText(code);
-    setCopiedIndex(index);
-    setTimeout(() => setCopiedIndex(null), 1500);
+  const router = React.useMemo(() => {
+    return {
+      pathname,
+      searchParams: new URLSearchParams(),
+      navigate: (path) => setPathname(String(path)),
+    };
+  }, [pathname]);
+
+  return router;
+}
+
+const Skeleton = styled('div')(({ theme, height }) => ({
+  backgroundColor: theme.palette.action.hover,
+  borderRadius: theme.shape.borderRadius,
+  height,
+  content: '" "',
+}));
+
+function SourceCodeDialog() {
+  const [open, setOpen] = React.useState(false);
+  const [copied, setCopied] = React.useState(false);
+
+  const handleToggle = () => {
+    setOpen(!open);
+    setCopied(false);
   };
 
-  if (loading) {
-    return (
-      <Box p={4} textAlign="center">
-        <Typography variant="h6" gutterBottom>Đang tải các button...</Typography>
-        <CircularProgress color="primary" />
-      </Box>
-    );
-  }
+  const sourceCode = `import * as React from 'react';
+import { createTheme, styled } from '@mui/material/styles';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import DescriptionIcon from '@mui/icons-material/Description';
+import LayersIcon from '@mui/icons-material/Layers';
+import { AppProvider } from '@toolpad/core/AppProvider';
+import { DashboardLayout } from '@toolpad/core/DashboardLayout';
+import { PageContainer } from '@toolpad/core/PageContainer';
+import Grid from '@mui/material/Grid';
+// ...rest of the code here (abbreviated to keep it short for view)
+`;
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(sourceCode);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Copy failed:', err);
+    }
+  };
 
   return (
-    <Box p={2}>
-      <Grid container spacing={4}>
-        {buttonVariants.map((btn, index) => (
-          <Grid item xs={12} md={4} key={index} sx={{ display: 'flex' }}>
-            <Paper
-              elevation={2}
-              sx={{
-                borderRadius: 2,
-                overflow: 'hidden',
-                p: 2,
-                display: 'flex',
-                flexDirection: 'column',
-                flexGrow: 1
-              }}
-            >
-              <Box sx={{ mb: 2, textAlign: 'center' }}>
-                {btn.customRender ? (
-                  <Stack direction="row" justifyContent="center">
-                    {btn.customRender}
-                  </Stack>
-                ) : (
-                  <Button
-                    variant={btn.variant}
-                    disabled={btn.disabled}
-                    sx={{
-                      color: btn.variant === 'text' || btn.variant === 'outlined' ? '#F28130' : '#fff',
-                      backgroundColor: btn.variant === 'contained' ? '#F28130' : 'transparent',
-                      borderColor: btn.variant === 'outlined' ? '#F28130' : undefined
-                    }}
-                  >
-                    {btn.label}
-                  </Button>
-                )}
-              </Box>
+    <>
+      <Button
+        variant="contained"
+        startIcon={<CodeIcon />}
+        onClick={handleToggle}
+        sx={{ position: 'fixed', bottom: 16, right: 16, zIndex: 1300 }}
+      >
+        Code
+      </Button>
 
-              <Divider sx={{ my: 2 }} />
+      <Dialog open={open} onClose={handleToggle} maxWidth="md" fullWidth>
+        <DialogTitle>
+          Source Code
+          <IconButton
+            aria-label="close"
+            onClick={handleToggle}
+            sx={{ position: 'absolute', right: 8, top: 8 }}
+          >
+            <CloseIcon />
+          </IconButton>
+        </DialogTitle>
 
-              <Box display="flex" justifyContent="space-between" alignItems="center" mb={1}>
-                <Typography variant="subtitle2"></Typography>
-                <Button
-                  onClick={() => handleCopy(btn.code, index)}
-                  startIcon={<ContentCopyIcon />}
-                  size="small"
-                >
-                  {copiedIndex === index ? 'Đã copy!' : 'Copy code'}
-                </Button>
-              </Box>
+        <DialogContent dividers>
+          <Button
+            onClick={handleCopy}
+            variant="outlined"
+            size="small"
+            sx={{ mb: 2 }}
+          >
+            {copied ? 'Copied!' : 'Copy Code'}
+          </Button>
+          <pre style={{
+            whiteSpace: 'pre-wrap',
+            wordWrap: 'break-word',
+            fontSize: 12,
+            backgroundColor: '#f5f5f5',
+            padding: 16,
+            borderRadius: 8,
+            overflow: 'auto',
+            maxHeight: '70vh',
+          }}>
+            {sourceCode}
+          </pre>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+}
 
-              <Box sx={{ flexGrow: 1 }} />
-              <SyntaxHighlighter language="jsx" style={oneDark} wrapLongLines>
-                {btn.code}
-              </SyntaxHighlighter>
-            </Paper>
+export default function DashboardLayoutBasic(props) {
+  const { window } = props;
+  const router = useDemoRouter('/dashboard');
+  const demoWindow = window ? window() : undefined;
+
+  return (
+    <AppProvider
+      navigation={NAVIGATION}
+      router={router}
+      theme={demoTheme}
+      window={demoWindow}
+    >
+      <DashboardLayout>
+        <PageContainer>
+          <Grid container spacing={1}>
+            <Grid item xs={5} />
+            <Grid item xs={12}><Skeleton height={14} /></Grid>
+            <Grid item xs={12}><Skeleton height={14} /></Grid>
+            <Grid item xs={4}><Skeleton height={100} /></Grid>
+            <Grid item xs={8}><Skeleton height={100} /></Grid>
+            <Grid item xs={12}><Skeleton height={150} /></Grid>
+            <Grid item xs={12}><Skeleton height={14} /></Grid>
+            <Grid item xs={3}><Skeleton height={100} /></Grid>
+            <Grid item xs={3}><Skeleton height={100} /></Grid>
+            <Grid item xs={3}><Skeleton height={100} /></Grid>
+            <Grid item xs={3}><Skeleton height={100} /></Grid>
           </Grid>
-        ))}
-      </Grid>
-    </Box>
+        </PageContainer>
+      </DashboardLayout>
+      <SourceCodeDialog />
+    </AppProvider>
   );
 }

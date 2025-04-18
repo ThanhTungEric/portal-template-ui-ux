@@ -1,19 +1,4 @@
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import {
-    Box,
-    Button,
-    CircularProgress,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    Divider,
-    Grid,
-    Paper,
-    Typography
-} from '@mui/material';
-import React, { useEffect, useState } from 'react';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import * as React from 'react';
 import { createTheme, styled } from '@mui/material/styles';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -21,284 +6,356 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import DescriptionIcon from '@mui/icons-material/Description';
 import LayersIcon from '@mui/icons-material/Layers';
 import { AppProvider } from '@toolpad/core/AppProvider';
+import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import { PageContainer } from '@toolpad/core/PageContainer';
-
-// Navigation configuration
-const NAVIGATION = [
-    {
-      kind: 'header',
-      title: 'Main items',
-    },
-    {
-      segment: 'dashboard',
-      title: 'Dashboard',
-      icon: <DashboardIcon />,
-    },
-    {
-      segment: 'orders',
-      title: 'Orders',
-      icon: <ShoppingCartIcon />,
-    },
-    {
-      kind: 'divider',
-    },
-    {
-      kind: 'header',
-      title: 'Analytics',
-    },
-    {
-      segment: 'reports',
-      title: 'Reports',
-      icon: <BarChartIcon />,
-      children: [
-        {
-          segment: 'sales',
-          title: 'Sales',
-          icon: <DescriptionIcon />,
-        },
-        {
-          segment: 'traffic',
-          title: 'Traffic',
-          icon: <DescriptionIcon />,
-        },
-      ],
-    },
-    {
-      segment: 'integrations',
-      title: 'Integrations',
-      icon: <LayersIcon />,
-    },
-  ];
-  
-  const demoTheme = createTheme({
-    colorSchemes: { light: true, dark: true },
-    cssVariables: {
-      colorSchemeSelector: 'class',
-    },
-    breakpoints: {
-      values: {
-        xs: 0,
-        sm: 600,
-        md: 600,
-        lg: 1200,
-        xl: 1536,
-      },
-    },
-  });
-  
-  function useDemoRouter(initialPath) {
-    const [pathname, setPathname] = React.useState(initialPath);
-  
-    const router = React.useMemo(() => {
-      return {
-        pathname,
-        searchParams: new URLSearchParams(),
-        navigate: (path) => setPathname(String(path)),
-      };
-    }, [pathname]);
-  
-    return router;
-  }
-  
-  const Skeleton = styled('div')(({ theme, height }) => ({
-    backgroundColor: theme.palette.action.hover,
-    borderRadius: theme.shape.borderRadius,
-    height,
-    content: '" "',
-  }));
-  
-  function DashboardLayout(props) {
-    const { window } = props;
-  
-    const router = useDemoRouter('/dashboard');
-  
-    // Remove this const when copying and pasting into your project.
-    const demoWindow = window ? window() : undefined;
-  
-    return (
-      <AppProvider
-        navigation={NAVIGATION}
-        router={router}
-        theme={demoTheme}
-        window={demoWindow}
-      >
-        <DashboardLayout>
-          <PageContainer>
-            <Grid container spacing={1}>
-              <Grid size={5} />
-              <Grid size={12}>
-                <Skeleton height={14} />
-              </Grid>
-              <Grid size={12}>
-                <Skeleton height={14} />
-              </Grid>
-              <Grid size={4}>
-                <Skeleton height={100} />
-              </Grid>
-              <Grid size={8}>
-                <Skeleton height={100} />
-              </Grid>
-  
-              <Grid size={12}>
-                <Skeleton height={150} />
-              </Grid>
-              <Grid size={12}>
-                <Skeleton height={14} />
-              </Grid>
-  
-              <Grid size={3}>
-                <Skeleton height={100} />
-              </Grid>
-              <Grid size={3}>
-                <Skeleton height={100} />
-              </Grid>
-              <Grid size={3}>
-                <Skeleton height={100} />
-              </Grid>
-              <Grid size={3}>
-                <Skeleton height={100} />
-              </Grid>
-            </Grid>
-          </PageContainer>
-        </DashboardLayout>
-      </AppProvider>
-    );
-  }
-
-const dashboardLayoutCode = `
-import * as React from 'react';
+import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
-import Snackbar from '@mui/material/Snackbar';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
 import IconButton from '@mui/material/IconButton';
+import CodeIcon from '@mui/icons-material/Code';
 import CloseIcon from '@mui/icons-material/Close';
 
-export default function SimpleSnackbar() {
-    const [open, setOpen] = React.useState(false);
+// display Dashboard demo
+const NAVIGATION = [
+  {
+    kind: 'header',
+    title: 'Main items',
+  },
+  {
+    segment: 'dashboard',
+    title: 'Dashboard',
+    icon: <DashboardIcon />,
+  },
+  {
+    segment: 'orders',
+    title: 'Orders',
+    icon: <ShoppingCartIcon />,
+  },
+  {
+    kind: 'divider',
+  },
+  {
+    kind: 'header',
+    title: 'Analytics',
+  },
+  {
+    segment: 'reports',
+    title: 'Reports',
+    icon: <BarChartIcon />,
+    children: [
+      {
+        segment: 'sales',
+        title: 'Sales',
+        icon: <DescriptionIcon />,
+      },
+      {
+        segment: 'traffic',
+        title: 'Traffic',
+        icon: <DescriptionIcon />,
+      },
+    ],
+  },
+  {
+    segment: 'integrations',
+    title: 'Integrations',
+    icon: <LayersIcon />,
+  },
+];
 
-    const handleClick = () => {
-        setOpen(true);
+const demoTheme = createTheme({
+  colorSchemes: { light: true, dark: true },
+  cssVariables: {
+    colorSchemeSelector: 'class',
+  },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 600,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
+});
+
+function useDemoRouter(initialPath) {
+  const [pathname, setPathname] = React.useState(initialPath);
+
+  const router = React.useMemo(() => {
+    return {
+      pathname,
+      searchParams: new URLSearchParams(),
+      navigate: (path) => setPathname(String(path)),
     };
+  }, [pathname]);
 
-    const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-        return;
-        }
+  return router;
+}
 
-        setOpen(false);
+const Skeleton = styled('div')(({ theme, height }) => ({
+  backgroundColor: theme.palette.action.hover,
+  borderRadius: theme.shape.borderRadius,
+  height,
+  content: '" "',
+}));
+
+function SourceCodeDialog() {
+  const [open, setOpen] = React.useState(false);
+  const [copied, setCopied] = React.useState(false);
+
+  const handleToggle = () => {
+    setOpen(!open);
+    setCopied(false);
+  };
+
+  const sourceCode = `
+import * as React from 'react';
+import { createTheme, styled } from '@mui/material/styles';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import DescriptionIcon from '@mui/icons-material/Description';
+import LayersIcon from '@mui/icons-material/Layers';
+import { AppProvider } from '@toolpad/core/AppProvider';
+import { DashboardLayout } from '@toolpad/core/DashboardLayout';
+import { PageContainer } from '@toolpad/core/PageContainer';
+import Grid from '@mui/material/Grid';
+
+const NAVIGATION = [
+  {
+    kind: 'header',
+    title: 'Main items',
+  },
+  {
+    segment: 'dashboard',
+    title: 'Dashboard',
+    icon: <DashboardIcon />,
+  },
+  {
+    segment: 'orders',
+    title: 'Orders',
+    icon: <ShoppingCartIcon />,
+  },
+  {
+    kind: 'divider',
+  },
+  {
+    kind: 'header',
+    title: 'Analytics',
+  },
+  {
+    segment: 'reports',
+    title: 'Reports',
+    icon: <BarChartIcon />,
+    children: [
+      {
+        segment: 'sales',
+        title: 'Sales',
+        icon: <DescriptionIcon />,
+      },
+      {
+        segment: 'traffic',
+        title: 'Traffic',
+        icon: <DescriptionIcon />,
+      },
+    ],
+  },
+  {
+    segment: 'integrations',
+    title: 'Integrations',
+    icon: <LayersIcon />,
+  },
+];
+
+const demoTheme = createTheme({
+  colorSchemes: { light: true, dark: true },
+  cssVariables: {
+    colorSchemeSelector: 'class',
+  },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 600,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
+});
+
+function useDemoRouter(initialPath) {
+  const [pathname, setPathname] = React.useState(initialPath);
+
+  const router = React.useMemo(() => {
+    return {
+      pathname,
+      searchParams: new URLSearchParams(),
+      navigate: (path) => setPathname(String(path)),
     };
+  }, [pathname]);
 
-    const action = (
-        <React.Fragment>
-        <Button color="secondary" size="small" onClick={handleClose}>
-            UNDO
-        </Button>
-        <IconButton
-            size="small"
-            aria-label="close"
-            color="inherit"
-            onClick={handleClose}
-        >
-            <CloseIcon fontSize="small" />
-        </IconButton>
-        </React.Fragment>
-    );
+  return router;
+}
 
-    return (
-        <div>
-        <Button onClick={handleClick}>Open Snackbar</Button>
-        <Snackbar
-            open={open}
-            autoHideDuration={6000}
-            onClose={handleClose}
-            message="Note archived"
-            action={action}
-        />
-        </div>
-    );
+const Skeleton = styled('div')(({ theme, height }) => ({
+  backgroundColor: theme.palette.action.hover,
+  borderRadius: theme.shape.borderRadius,
+  height,
+  content: '" "',
+}));
+
+export default function DashboardLayoutBasic(props) {
+  const { window } = props;
+
+  const router = useDemoRouter('/dashboard');
+
+  // Remove this const when copying and pasting into your project.
+  const demoWindow = window ? window() : undefined;
+
+  return (
+    <AppProvider
+      navigation={NAVIGATION}
+      router={router}
+      theme={demoTheme}
+      window={demoWindow}
+    >
+      <DashboardLayout>
+        <PageContainer>
+          <Grid container spacing={1}>
+            <Grid size={5} />
+            <Grid size={12}>
+              <Skeleton height={14} />
+            </Grid>
+            <Grid size={12}>
+              <Skeleton height={14} />
+            </Grid>
+            <Grid size={4}>
+              <Skeleton height={100} />
+            </Grid>
+            <Grid size={8}>
+              <Skeleton height={100} />
+            </Grid>
+
+            <Grid size={12}>
+              <Skeleton height={150} />
+            </Grid>
+            <Grid size={12}>
+              <Skeleton height={14} />
+            </Grid>
+
+            <Grid size={3}>
+              <Skeleton height={100} />
+            </Grid>
+            <Grid size={3}>
+              <Skeleton height={100} />
+            </Grid>
+            <Grid size={3}>
+              <Skeleton height={100} />
+            </Grid>
+            <Grid size={3}>
+              <Skeleton height={100} />
+            </Grid>
+          </Grid>
+        </PageContainer>
+      </DashboardLayout>
+    </AppProvider>
+  );
 }
 `;
 
-const dashboardLayoutList = [
-    {
-        name: 'Dashboard Layout',
-        component: <DashboardLayout />,
-        code: dashboardLayoutCode
-    },
-]
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(sourceCode);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Copy failed:', err);
+    }
+  };
 
-export default function DashboardLayoutComponent() {
-    const [open, setOpen] = useState(false);
-    const [copied, setCopied] = useState(false);
-    const [codeString, setCodeString] = useState('');
-    const [loading, setLoading] = useState(true);
-    
+  return (
+    <>
+      <Button
+        variant="contained"
+        startIcon={<CodeIcon />}
+        onClick={handleToggle}
+        sx={{ position: 'fixed', bottom: 16, right: 16, zIndex: 1300 }}
+      >
+        Code
+      </Button>
 
-    useEffect(() => {
-        const timer = setTimeout(() => setLoading(false), 800); // mô phỏng tải dữ liệu
-        return () => clearTimeout(timer);
-    }, []);
-    
+      <Dialog open={open} onClose={handleToggle} maxWidth="md" fullWidth>
+        <DialogTitle>
+          Source Code
+          <IconButton
+            aria-label="close"
+            onClick={handleToggle}
+            sx={{ position: 'absolute', right: 8, top: 8 }}
+          >
+            <CloseIcon />
+          </IconButton>
+        </DialogTitle>
 
-    const handleOpen = (code) => {
-        setCodeString(code);
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-
-    if (loading) {
-            return (
-            <Box p={4} textAlign="center">
-                <Typography variant="h6" gutterBottom>Đang tải dashboard layout...</Typography>
-                <CircularProgress color="primary" />
-            </Box>
-            );
-        }
-    
-    // THÊM HANDLE COPY
-    const handleCopy = () => {
-        navigator.clipboard.writeText(codeString);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 1500);
-    };
-
-    return (
-        <Box p={2} mx={10} my={4}>
-            <Grid container spacing={8}>
-                {dashboardLayoutList.map((item, idx) => (
-                    <Grid item xs={12} md={6} key={idx}>
-                    <Paper elevation={3} sx={{ p: 4, minWidth: 200, minHeight: 250 }}>
-                        <Typography variant="h6" gutterBottom>
-                        {item.name}
-                        </Typography>
-                        {item.component}
-                        <Divider sx={{ my: 2 }} />
-                        <Button variant="outlined" onClick={() => handleOpen(item.code)}>
-                        Code
-                        </Button>
-                    </Paper>
-                    </Grid>
-                ))}
-            </Grid>
-            {/* ✅ Popup xem mã nguồn */}
-            <Dialog open={open} onClose={handleClose} fullWidth maxWidth="md">
-                <DialogContent dividers>
-                    <SyntaxHighlighter language="jsx" style={oneDark} wrapLongLines showLineNumbers>
-                    {codeString}
-                    </SyntaxHighlighter>
-                </DialogContent>
-
-                <DialogActions>
-                    <Button onClick={handleCopy} startIcon={<ContentCopyIcon />}>
-                    {copied ? 'Đã copy!' : 'Copy code'}
-                    </Button>
-                    <Button onClick={handleClose} color="secondary">
-                    Đóng
-                    </Button>
-                </DialogActions>
-            </Dialog>
-        </Box>
-    );
+        <DialogContent dividers>
+          <Button
+            onClick={handleCopy}
+            variant="outlined"
+            size="small"
+            sx={{ mb: 2 }}
+          >
+            {copied ? 'Copied!' : 'Copy Code'}
+          </Button>
+          <pre style={{
+            whiteSpace: 'pre-wrap',
+            wordWrap: 'break-word',
+            fontSize: 12,
+            backgroundColor: '#f5f5f5',
+            padding: 16,
+            borderRadius: 8,
+            overflow: 'auto',
+            maxHeight: '70vh',
+          }}>
+            {sourceCode}
+          </pre>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
 }
+
+export default function DashboardLayoutBasic(props) {
+  const { window } = props;
+  const router = useDemoRouter('/dashboard');
+  const demoWindow = window ? window() : undefined;
+
+  return (
+    <AppProvider
+      navigation={NAVIGATION}
+      router={router}
+      theme={demoTheme}
+      window={demoWindow}
+    >
+      <DashboardLayout>
+        <PageContainer>
+          <Grid container spacing={1}>
+            <Grid item xs={5} />
+            <Grid item xs={12}><Skeleton height={14} /></Grid>
+            <Grid item xs={12}><Skeleton height={14} /></Grid>
+            <Grid item xs={4}><Skeleton height={100} /></Grid>
+            <Grid item xs={8}><Skeleton height={100} /></Grid>
+            <Grid item xs={12}><Skeleton height={150} /></Grid>
+            <Grid item xs={12}><Skeleton height={14} /></Grid>
+            <Grid item xs={3}><Skeleton height={100} /></Grid>
+            <Grid item xs={3}><Skeleton height={100} /></Grid>
+            <Grid item xs={3}><Skeleton height={100} /></Grid>
+            <Grid item xs={3}><Skeleton height={100} /></Grid>
+          </Grid>
+        </PageContainer>
+      </DashboardLayout>
+      <SourceCodeDialog />
+    </AppProvider>
+  );
+}
+
