@@ -16,8 +16,14 @@ import {
 import React, { useEffect, useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { LineChart } from '@mui/x-charts/LineChart';
+import {
+  worldElectricityProduction,
+  keyToLabel,
+  colors,
+} from '../dataset/worldElectricityProduction';
 
-// Basic bar chart with Data set
+// Display basic bar chart with Data set demo
 const BarsDataset = () => {
   const chartSetting = {
     yAxis: [
@@ -44,7 +50,7 @@ const BarsDataset = () => {
   );
 };
 
-// Basic Bar chart w Dataset
+// Basic Bar chart w Dataset code
 const barsDataSet = `
 import * as React from 'react';
 import { BarChart } from '@mui/x-charts/BarChart';
@@ -77,12 +83,102 @@ export default function BarsDataset() {
 }
 `;
 
+// Display Basic Line chart w Dataset demo
+
+const LineDataset = () => {
+  const stackStrategy = {
+    stack: 'total',
+    area: true,
+    stackOffset: 'none', // To stack 0 on top of others
+  };
+  
+  const customize = {
+    height: 350,
+    hideLegend: true,
+  };
+
+  return (
+    <LineChart
+      xAxis={[
+        {
+          dataKey: 'year',
+          valueFormatter: (value) => value.toString(),
+          min: 1985,
+          max: 2022,
+        },
+      ]}
+      yAxis={[{ width: 50 }]}
+      series={Object.keys(keyToLabel).map((key) => ({
+        dataKey: key,
+        label: keyToLabel[key],
+        color: colors[key],
+        showMark: false,
+        ...stackStrategy,
+      }))}
+      dataset={worldElectricityProduction}
+      {...customize}
+    />
+  );
+}
+
+// Basic Line chart w Dataset code
+const lineDataSet = `
+import * as React from 'react';
+import { LineChart } from '@mui/x-charts/LineChart';
+import {
+  worldElectricityProduction,
+  keyToLabel,
+  colors,
+} from './worldElectricityProduction';
+
+const stackStrategy = {
+  stack: 'total',
+  area: true,
+  stackOffset: 'none', // To stack 0 on top of others
+};
+
+const customize = {
+  height: 350,
+  hideLegend: true,
+};
+
+export default function LineDataset() {
+  return (
+    <LineChart
+      xAxis={[
+        {
+          dataKey: 'year',
+          valueFormatter: (value) => value.toString(),
+          min: 1985,
+          max: 2022,
+        },
+      ]}
+      yAxis={[{ width: 50 }]}
+      series={Object.keys(keyToLabel).map((key) => ({
+        dataKey: key,
+        label: keyToLabel[key],
+        color: colors[key],
+        showMark: false,
+        ...stackStrategy,
+      }))}
+      dataset={worldElectricityProduction}
+      {...customize}
+    />
+  );
+}
+`;
+
 const chartList = [
     {
-        name: 'Chart Bar',
+        name: 'Bar Chart',
         component: <BarsDataset />,
         code: barsDataSet
     },
+    {
+      name: 'Line Chart',
+      component: <LineDataset />,
+      code: lineDataSet
+  },
     
 ]
 
@@ -111,13 +207,13 @@ export default function ChartComponent() {
     if (loading) {
             return (
             <Box p={4} textAlign="center">
-                <Typography variant="h6" gutterBottom>Đang tải các snackbar...</Typography>
+                <Typography variant="h6" gutterBottom>Đang tải...</Typography>
                 <CircularProgress color="primary" />
             </Box>
             );
         }
     
-    // THÊM HANDLE COPY
+    // ADD HANDLE COPY
     const handleCopy = () => {
         navigator.clipboard.writeText(codeString);
         setCopied(true);
@@ -142,7 +238,7 @@ export default function ChartComponent() {
                     </Grid>
                 ))}
             </Grid>
-            {/* Popup xem mã nguồn */}
+            {/* Popup source code */}
             <Dialog open={open} onClose={handleClose} fullWidth maxWidth="md">
                 <DialogContent dividers>
                     <SyntaxHighlighter language="jsx" style={oneDark} wrapLongLines showLineNumbers>
