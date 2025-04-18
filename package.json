@@ -16,6 +16,7 @@
     "@mui/lab": "^7.0.0-beta.10",
     "@mui/material": "^7.0.1",
     "@mui/toolpad-core": "^0.1.51",
+    "@mui/x-charts": "^8.0.0-beta.3",
     "@mui/x-tree-view": "^7.28.1",
     "@toolpad/core": "^0.14.0",
     "react": "^18.3.1",

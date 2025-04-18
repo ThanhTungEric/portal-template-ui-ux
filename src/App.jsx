@@ -22,6 +22,7 @@ import ProgressComponent from "./components/ProgressComponent.jsx";
 import DashboardLayout from "./components/DashboardLayout.jsx";
 import PageContainer from "./components/PageContainer.jsx";
 import SnackbarComponent from './components/SnackbarComponent.jsx';
+import Chart from './components/Chart.jsx'
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
             <Route path="/menu" element={<Menu />} />
             <Route path="/layout/dashboard" element={<DashboardLayout />} />
             <Route path="/layout/pagecontainer" element={<PageContainer />} />
+            <Route path="/chart" element={<Chart />} />
             <Route path="*" element={<p>Chọn mục bên trái để xem nội dung. v2.</p>} />
           </Routes>
         </main>
