@@ -7,6 +7,7 @@ import BasicSimpleTreeView from './components/BasicSimpleTreeView.jsx';
 import ButtonComponent from './components/ButtonComponent.jsx';
 import Footer from './components/Footer.jsx';
 import FormComponents from './components/FormComponents.jsx';
+import Header from './components/Header.jsx';
 import IconView from './components/IconView.jsx';
 import InputComponentsShowcase from './components/InputComponentsShowcase.jsx';
 import ListView from './components/ListView.jsx';
@@ -49,6 +50,7 @@ function App() {
             <Route path="/data/typography" element={<TypographyView />} />
             <Route path="/data/timeline" element={<TimelineView />} />
             <Route path="/navigation" element={<Navigation />} />
+            <Route path="/navigation/header" element={<Header />} />
             <Route path="/navigation/footer" element={<Footer />} />
             <Route path="/navigation/menu" element={<MenuComponent />} />
             <Route path="*" element={<p>Chọn mục bên trái để xem nội dung. v2.</p>} />

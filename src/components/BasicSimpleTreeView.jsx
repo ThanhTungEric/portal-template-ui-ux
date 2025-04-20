@@ -59,6 +59,9 @@ export default function BasicSimpleTreeView() {
       case 'Footer':
         navigate('/navigation/footer');
         break;
+      case 'Header':
+        navigate('/navigation/header');
+        break;
       case 'Alert':
         navigate('/feedback/alert');
         break;
@@ -133,6 +136,7 @@ export default function BasicSimpleTreeView() {
           }}
         >
           <TreeItem itemId="Menu" label="Menu" />
+          <TreeItem itemId="Header" label="Header" />
           <TreeItem itemId="Footer" label="Footer" />
         </TreeItem>
       </SimpleTreeView>

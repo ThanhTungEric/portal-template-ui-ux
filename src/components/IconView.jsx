@@ -178,7 +178,7 @@ export default function IconView() {
               {'<Icon color="primary" />'}
             </SyntaxHighlighter></ListItem>
               <ListItem>Use sx for a specific color: <SyntaxHighlighter language="jsx" customStyle={{ padding: "2px", marginLeft: "2px"}}>
-              {'<Icon xs={{color:"#f50057"}} />'}
+              {'<Icon sx={{color:"#f50057"}} />'}
             </SyntaxHighlighter>
               </ListItem>
             </List>

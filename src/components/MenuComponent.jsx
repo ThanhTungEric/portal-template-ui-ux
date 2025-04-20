@@ -592,7 +592,7 @@ export default function MenuComponent() {
     return (
         <>
             <Box p={2} mx={10} my={4}>
-            <Typography variant="h4" gutterBottom>
+            <Typography variant="h5" gutterBottom>
                 Menu Component
             </Typography>
         
@@ -613,7 +613,7 @@ export default function MenuComponent() {
                 ))}
             </Grid>
         
-            <Typography variant="h4" gutterBottom mt={6}>
+            <Typography variant="h5" gutterBottom mt={6}>
                 Tree Component
             </Typography>
         
