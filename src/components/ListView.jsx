@@ -368,17 +368,15 @@ export default function ListView() {
     };
 
     if (loading) {
-            return (
-            <Box p={4} textAlign="center">
-                <Typography variant="h6" gutterBottom>Đang tải các list...</Typography>
-                <CircularProgress color="primary" />
-            </Box>
-            );
-        }
+        return (
+        <Box p={4} textAlign="center">
+            <Typography variant="h6" gutterBottom>Đang tải các list...</Typography>
+            <CircularProgress color="primary" />
+        </Box>
+        );
+    }
     
 
-
-    // ✅ THÊM HANDLE COPY
     const handleCopy = () => {
         navigator.clipboard.writeText(codeString);
         setCopied(true);

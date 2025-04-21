@@ -1,16 +1,24 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
+
+// Components
+import AlertComponent from './components/AlertComponent.jsx';
 import BasicSimpleTreeView from './components/BasicSimpleTreeView.jsx';
 import ButtonComponent from './components/ButtonComponent.jsx';
+import Footer from './components/Footer.jsx';
 import FormComponents from './components/FormComponents.jsx';
+import Header from './components/Header.jsx';
 import IconView from './components/IconView.jsx';
 import InputComponentsShowcase from './components/InputComponentsShowcase.jsx';
 import ListView from './components/ListView.jsx';
 import LoadingButtonsTransition from './components/LoadingButtonsTransition.jsx';
 import LoginForm from './components/LoginForm.jsx';
-import SnackbarComponent from './components/SnackbarComponent.jsx';
 import DialogComponent from './components/DialogComponent.jsx';
-import ProgressComponent from "./components/ProgressComponent.jsx";
+
+import MenuComponent from './components/MenuComponent.jsx';
+import TableView from './components/TableView.jsx';
+import TimelineView from './components/TimelineView.jsx';
+import TypographyView from './components/TypographyView.jsx';
 
 // Pages
 import Home from './pages/Home.jsx';
@@ -18,12 +26,12 @@ import Input from './pages/Input.jsx';
 import Introduction from './pages/Introduction.jsx';
 import Login from './pages/Login.jsx';
 import Menu from './pages/Menu.jsx';
-import DialogComponent from './components/DialogComponent.jsx';
 import ProgressComponent from "./components/ProgressComponent.jsx";
 import DashboardLayout from "./components/DashboardLayout.jsx";
 import PageContainer from "./components/PageContainer.jsx";
 import SnackbarComponent from './components/SnackbarComponent.jsx';
 import Chart from './components/Chart.jsx'
+import Navigation from './pages/Navigation.jsx';
 
 function App() {
 
@@ -56,6 +64,12 @@ function App() {
             <Route path="/layout/dashboard" element={<DashboardLayout />} />
             <Route path="/layout/pagecontainer" element={<PageContainer />} />
             <Route path="/chart" element={<Chart />} />
+            <Route path="/data/typography" element={<TypographyView />} />
+            <Route path="/data/timeline" element={<TimelineView />} />
+            <Route path="/navigation" element={<Navigation />} />
+            <Route path="/navigation/header" element={<Header />} />
+            <Route path="/navigation/footer" element={<Footer />} />
+            <Route path="/navigation/menu" element={<MenuComponent />} />
             <Route path="*" element={<p>Chọn mục bên trái để xem nội dung. v2.</p>} />
           </Routes>
         </main>
