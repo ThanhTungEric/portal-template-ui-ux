@@ -1,8 +1,5 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
-
-// Components
-import AlertComponent from './components/AlertComponent.jsx';
 import BasicSimpleTreeView from './components/BasicSimpleTreeView.jsx';
 import ButtonComponent from './components/ButtonComponent.jsx';
 import FormComponents from './components/FormComponents.jsx';
@@ -16,13 +13,17 @@ import DialogComponent from './components/DialogComponent.jsx';
 import ProgressComponent from "./components/ProgressComponent.jsx";
 
 // Pages
-import TableView from './components/TableView.jsx';
-import TypographyView from './components/TypographyView.jsx';
 import Home from './pages/Home.jsx';
 import Input from './pages/Input.jsx';
 import Introduction from './pages/Introduction.jsx';
 import Login from './pages/Login.jsx';
 import Menu from './pages/Menu.jsx';
+import DialogComponent from './components/DialogComponent.jsx';
+import ProgressComponent from "./components/ProgressComponent.jsx";
+import DashboardLayout from "./components/DashboardLayout.jsx";
+import PageContainer from "./components/PageContainer.jsx";
+import SnackbarComponent from './components/SnackbarComponent.jsx';
+import Chart from './components/Chart.jsx'
 
 function App() {
 
@@ -49,9 +50,12 @@ function App() {
             <Route path="/feedback/dialog" element={<DialogComponent />} />
             <Route path="/data/list" element={<ListView />} />
             <Route path="/feedback/progress" element={<ProgressComponent />} />
+            <Route path="/data/list" element={<ListView />} />
             <Route path="/data/table" element={<TableView />} />
-            <Route path="/data/typography" element={<TypographyView />} />
             <Route path="/menu" element={<Menu />} />
+            <Route path="/layout/dashboard" element={<DashboardLayout />} />
+            <Route path="/layout/pagecontainer" element={<PageContainer />} />
+            <Route path="/chart" element={<Chart />} />
             <Route path="*" element={<p>Chọn mục bên trái để xem nội dung. v2.</p>} />
           </Routes>
         </main>
