@@ -67,22 +67,22 @@ export default function BasicSimpleTreeView() {
         break;
       case 'Dialog':
         navigate('/feedback/dialog');
-      break;
+        break;
       case 'Progress':
         navigate('/feedback/progress');
-      break;
+        break;
       case 'Snackbar':
         navigate('/feedback/snackbar');
         break;
       case 'DashboardLayout':
         navigate('/layout/dashboard');
-      break;
+        break;
       case 'PageContainer':
         navigate('/layout/pagecontainer');
-      break;
+        break;
       case 'Chart':
         navigate('/chart');
-      break;
+        break;
       default:
         break;
     }
