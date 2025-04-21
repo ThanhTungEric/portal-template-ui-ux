@@ -50,18 +50,6 @@ export default function BasicSimpleTreeView() {
       case 'Timeline':
         navigate('/data/timeline');
         break;
-      case 'Navigation':
-        navigate('/navigation');
-        break;
-      case 'Menu':
-        navigate('/navigation/menu');
-        break;
-      case 'Footer':
-        navigate('/navigation/footer');
-        break;
-      case 'Header':
-        navigate('/navigation/header');
-        break;
       case 'Alert':
         navigate('/feedback/alert');
         break;
@@ -73,6 +61,15 @@ export default function BasicSimpleTreeView() {
         break;
       case 'Snackbar':
         navigate('/feedback/snackbar');
+        break;
+      case 'Menu':
+        navigate('/navigation/menu');
+        break;
+      case 'Header':
+        navigate('/navigation/header');
+        break;
+      case 'Footer':
+        navigate('/navigation/footer');
         break;
       case 'DashboardLayout':
         navigate('/layout/dashboard');
@@ -98,7 +95,6 @@ export default function BasicSimpleTreeView() {
           style={{ maxWidth: '100%', height: 'auto', cursor: 'pointer' }}
         />
       </Box>
-
 
       <SimpleTreeView onSelectedItemsChange={handleSelect}>
         <TreeItem
@@ -148,15 +144,25 @@ export default function BasicSimpleTreeView() {
         <TreeItem
           itemId="Navigation"
           label={<span className="tree-label">Navigation</span>}
-          slotProps={{
-            expandIcon: { className: 'tree-icon' },
-            collapseIcon: { className: 'tree-icon' },
-          }}
+          slotProps={{ expandIcon: { className: 'tree-icon' }, collapseIcon: { className: 'tree-icon' } }}
         >
           <TreeItem itemId="Menu" label="Menu" />
           <TreeItem itemId="Header" label="Header" />
           <TreeItem itemId="Footer" label="Footer" />
         </TreeItem>
+        <TreeItem
+          itemId="Layout"
+          label={<span className="tree-label">Layout</span>}
+          slotProps={{ expandIcon: { className: 'tree-icon' }, collapseIcon: { className: 'tree-icon' } }}
+        >
+          <TreeItem itemId="DashboardLayout" label="Dashboard Layout" />
+          <TreeItem itemId="PageContainer" label="Page Container" />
+        </TreeItem>
+        <TreeItem
+          itemId="Chart"
+          label={<span className="tree-label">Chart</span>}
+          slotProps={{ expandIcon: { className: 'tree-icon' }, collapseIcon: { className: 'tree-icon' } }}
+        />
       </SimpleTreeView>
     </Box>
   );
